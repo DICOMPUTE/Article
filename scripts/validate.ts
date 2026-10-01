@@ -135,7 +135,10 @@ for (const file of blogFiles) {
   slugs.set(slug, where);
   if (!draft && !(data.archived ?? false)) publishable += 1;
 }
-if (publishable === 0) fail("blog/", "zero publishable posts (non-draft, non-archived) -- the site refuses to publish an empty blog");
+// No "zero publishable posts" failure here: a drafts-only branch is a valid
+// thing to open a pull request with. The site refuses to PUBLISH a commit
+// with no publishable post (see README.md, "What happens after merge"),
+// and the summary line below says when that would apply.
 
 // ---- assets ----------------------------------------------------------------
 for (const path of walk(ASSETS)) {
@@ -156,3 +159,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 console.log(`validate: OK -- ${slugs.size} post(s), ${publishable} publishable`);
+if (publishable === 0) console.log("validate: note -- zero publishable posts; the site will not publish this commit (it keeps serving the last one that had any)");

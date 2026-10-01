@@ -37,8 +37,10 @@ to `main` skips it. On every sync the site validates the new commit again
 with its own copy of the rules, and only then switches to it, atomically.
 If that check fails, the site keeps serving the last commit that passed.
 Nothing goes half-live, and a bad file never takes `/blog` down. The site
-also refuses a commit with **zero publishable posts** (no `blog/` folder,
-an empty one, or only drafts), because serving it would empty the blog.
+also refuses to publish a commit with **zero publishable posts** (no
+`blog/` folder, an empty one, or only drafts), because serving it would
+empty the blog. This repository's own check accepts such a branch (a
+drafts-only pull request is fine); it only prints a note.
 
 ## Layout
 
