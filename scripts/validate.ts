@@ -27,6 +27,7 @@ const SCHEMA: Schema = {
   archived: { type: "boolean" },
   pinned: { type: "boolean" },
   cover: { type: "string" },
+  coverAlt: { type: "string" },
 };
 const POST_FILE = /^(\d{4}-\d{2}-\d{2})-([a-z0-9]+(?:-[a-z0-9]+)*)\.md$/;
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -46,6 +47,7 @@ type Front = {
   draft?: boolean;
   archived?: boolean;
   cover?: string;
+  coverAlt?: string;
 };
 
 const errors: string[] = [];
@@ -145,6 +147,23 @@ for (const path of walk(ASSETS)) {
   const rel = relative(ROOT, path).split(sep).join("/");
   const name = rel.split("/").pop()!;
   if (name === ".gitkeep" || name === "README.md") continue;
+  if (name === "banner.generated.json") {
+    // The banner CI's provenance file (see README.md, "Banner generation").
+    // Not an image: the extension and size rules below do not apply, but it
+    // must be the generator's own record -- engine id, seed, brief, checks.
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(readFileSync(path, "utf8"));
+    } catch {
+      fail(rel, "banner.generated.json is not valid JSON");
+      continue;
+    }
+    const engine = (parsed as { engine?: unknown }).engine;
+    if (typeof engine !== "string" || !engine.startsWith("article-banner/")) {
+      fail(rel, "banner.generated.json must carry an `engine` id starting with `article-banner/`");
+    }
+    continue;
+  }
   const ext = extname(name).toLowerCase();
   if (ext === ".svg") fail(rel, "SVG is not allowed (it can carry script) -- export WebP or PNG");
   else if (!IMAGE_EXT.has(ext)) fail(rel, "only .webp, .png, .jpg are allowed under assets/");

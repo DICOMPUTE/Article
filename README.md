@@ -54,7 +54,9 @@ assets/
 scripts/
   validate.ts                      the checks CI runs
   frontmatter.ts                   the front-matter parser (a copy of the site's)
+  banner/generate.ts               the editorial banner generator (see "Banner generation")
 .github/workflows/validate.yml     runs scripts/validate.ts on every PR and push to main
+.github/workflows/banner.yml       generates banners for posts that have none (see "Banner generation")
 ```
 
 ## File name
@@ -83,6 +85,7 @@ draft: false                   # optional; true keeps the post off every listing
 archived: false                # optional; true lists it only on /blog/archived (its URL keeps working)
 pinned: false                  # optional; the index's featured slot prefers this post over the newest one
 cover: /blog-assets/blog/<slug>/banner.webp   # required for a published (non-draft) post
+coverAlt: "One sentence describing the banner image."   # optional; the banner <img>'s alt text
 ---
 ```
 
@@ -124,6 +127,34 @@ until a real banner lands there. To switch a post to a real banner, add
 `assets/blog/<slug>/banner.webp` and change its `cover` to
 `/blog-assets/blog/<slug>/banner.webp` in the same pull request. The 16:9
 ratio is not checked automatically yet; check it by eye.
+
+### Banner generation
+
+A pull request that adds or edits `blog/<date>-<slug>.md` while
+`assets/blog/<slug>/banner.webp` is missing triggers the `banner` workflow:
+it runs `scripts/banner/generate.ts`, which builds a content brief from the
+post's own words (title, description, tags, categories, `##` headings, the
+first paragraph) and renders a seeded, fully reproducible editorial
+illustration in the house style (engine A — procedural, no API keys, no
+network; see `docs/banner-style.md`). The workflow commits to the same pull
+request branch:
+
+- `assets/blog/<slug>/banner.webp` — 1600×900 (16:9), at most 300 KB;
+- `assets/blog/<slug>/banner.generated.json` — the brief, the engine version
+  and the seed, so anyone can regenerate the exact image;
+- the post's `cover:` repointed at the banner and a generated `coverAlt:`
+  (a pre-existing `coverAlt:` is never overwritten).
+
+Rules the generator enforces on its own output: no text of any kind (there
+is no glyph renderer in the code), the lower 40% stays calm and measures at
+least 4.5:1 against white for the hero title, and a `banner.webp` that has
+no `banner.generated.json` beside it is never touched — a human image
+always wins. Fork pull requests get no write token: the workflow posts a
+note and skips generation, and a maintainer can run it with
+`workflow_dispatch` (or locally: `bun scripts/banner/generate.ts --slugs
+<slug> [--force | --seed-suffix <s>]`) after merging. If generation fails
+for any other reason the pull request is not blocked; the post ships and
+the site's gradient fallback serves until a banner lands.
 
 ## Writing rules
 
