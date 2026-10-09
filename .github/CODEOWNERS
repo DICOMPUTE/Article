@@ -1,0 +1,8 @@
+# CODEOWNERS for DICOMPUTE/Article (blog content).
+#
+# The blog owner named here must be a real person who agreed to be named
+# (Article README, doctrine rule 3). The owner decision is tracked in
+# DICOMPUTE/AI#17374; this file gets a real entry once that record lands.
+# Until then there is deliberately no owner line: the ruleset on `main`
+# (docs/main-ruleset.json, DICOMPUTE/AI#17376) does not require code-owner
+# review, so an empty file is safe and no self-approval theatre is created.
