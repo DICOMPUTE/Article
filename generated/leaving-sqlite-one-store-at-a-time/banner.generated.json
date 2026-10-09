@@ -1,0 +1,26 @@
+{
+  "slug": "leaving-sqlite-one-store-at-a-time",
+  "file": "assets/blog/leaving-sqlite-one-store-at-a-time/banner.webp",
+  "cover": "/blog-assets/blog/leaving-sqlite-one-store-at-a-time/banner.webp",
+  "dimensions": "1600x900",
+  "aspectRatio": "16:9",
+  "bytes": 15534,
+  "format": "webp",
+  "textBakedIn": false,
+  "method": {
+    "type": "deterministic-svg-pattern",
+    "generator": "generated/generate-banners.mjs (committed alongside this file)",
+    "palette": "DiCompute house palette: navy bases #0c0c0e/#0f172a/#111827/#1e293b, indigo accents #4338ca/#4f46e5/#6366f1/#818cf8/#a5b4fc (cf. console app/blog-skin.css .blog-banner-fallback-*)",
+    "aiUsed": false,
+    "vendor": null,
+    "note": "Flat SVG shapes only; every alpha is pre-composited into a flat color by the generator because ImageMagick's internal SVG renderer ignores fill-opacity/stroke-opacity. No gradients, no <text>.",
+    "exportCommand": "convert -background none generated/leaving-sqlite-one-store-at-a-time/source.svg -resize '1600x900!' -quality 90 -define webp:method=6 assets/blog/leaving-sqlite-one-store-at-a-time/banner.webp"
+  },
+  "sha256": {
+    "banner.webp": "632023491c47ed00cdc1e3817d5c7caecbfbddd389b61fb9182d47c9ab0b6695",
+    "source.svg": "0e6dfab6729ebfdae9cbd78ee94bbb47c95acb6cba049f2f13853c8ee97a0616"
+  },
+  "generatedOn": "2026-10-10",
+  "issue": "DICOMPUTE/DiCompute#17373",
+  "replaces": "/blog/leaving-sqlite-one-store-at-a-time/opengraph-image (gradient fallback placeholder)"
+}

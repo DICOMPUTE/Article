@@ -5,7 +5,7 @@ date: 2026-09-02
 authors: [DiCompute team]
 tags: [changelog, api]
 categories: [product]
-cover: /blog/what-shipped-in-august/opengraph-image
+cover: /blog-assets/blog/what-shipped-in-august/banner.webp
 ---
 
 The [changelog](/changelog) records every partner-visible change to the API
