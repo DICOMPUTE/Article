@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<!-- what-shipped-in-august banner. Deterministic flat-shape pattern in the DiCompute house palette; alphas pre-composited (house palette: navy bases + indigo accents, cf. console app/blog-skin.css). -->
+<rect width="1600" height="900" fill="#0f172a"/>
+<polygon points="-420,0 -300,0 -1200,900 -1320,900" fill="#161c40"/>
+<polygon points="-240,0 -120,0 -1020,900 -1140,900" fill="#1c204f"/>
+<polygon points="-60,0 60,0 -840,900 -960,900" fill="#252c5e"/>
+<polygon points="120,0 240,0 -660,900 -780,900" fill="#232666"/>
+<polygon points="300,0 420,0 -480,900 -600,900" fill="#2f3576"/>
+<polygon points="480,0 600,0 -300,900 -420,900" fill="#414a85"/>
+<polygon points="660,0 780,0 -120,900 -240,900" fill="#393f8e"/>
+<polygon points="840,0 960,0 60,900 -60,900" fill="#636fa0"/>
+<polygon points="1020,0 1140,0 240,900 120,900" fill="#5660aa"/>
+<polygon points="1200,0 1320,0 420,900 300,900" fill="#484db1"/>
+<polygon points="300,0 312,0 12,900 0,900" fill="#7681c6"/>
+<polygon points="660,0 668,0 368,900 360,900" fill="#6a74c0"/>
+<rect x="60" y="90" width="52" height="9" fill="#5a6693" transform="rotate(45 86 94.5)"/>
+<rect x="215" y="166" width="52" height="9" fill="#5a6693" transform="rotate(45 241 170.5)"/>
+<rect x="370" y="242" width="52" height="9" fill="#5a6693" transform="rotate(45 396 246.5)"/>
+<rect x="525" y="318" width="52" height="9" fill="#5a6693" transform="rotate(45 551 322.5)"/>
+<rect x="680" y="394" width="52" height="9" fill="#5a6693" transform="rotate(45 706 398.5)"/>
+<rect x="835" y="470" width="52" height="9" fill="#5a6693" transform="rotate(45 861 474.5)"/>
+<rect x="990" y="546" width="52" height="9" fill="#5a6693" transform="rotate(45 1016 550.5)"/>
+<rect x="1145" y="622" width="52" height="9" fill="#5a6693" transform="rotate(45 1171 626.5)"/>
+<rect x="1300" y="698" width="52" height="9" fill="#5a6693" transform="rotate(45 1326 702.5)"/>
+<rect x="1455" y="774" width="52" height="9" fill="#5a6693" transform="rotate(45 1481 778.5)"/>
+<circle cx="900" cy="100" r="3" fill="#1a2436"/>
+<circle cx="900" cy="275" r="3" fill="#1a2436"/>
+<circle cx="900" cy="450" r="3" fill="#1a2436"/>
+<circle cx="900" cy="625" r="3" fill="#1a2436"/>
+<circle cx="900" cy="800" r="3" fill="#1a2436"/>
+<circle cx="1075" cy="100" r="3" fill="#1a2436"/>
+<circle cx="1075" cy="275" r="3" fill="#1a2436"/>
+<circle cx="1075" cy="450" r="3" fill="#1a2436"/>
+<circle cx="1075" cy="625" r="3" fill="#1a2436"/>
+<circle cx="1075" cy="800" r="3" fill="#1a2436"/>
+<circle cx="1250" cy="100" r="3" fill="#1a2436"/>
+<circle cx="1250" cy="275" r="3" fill="#1a2436"/>
+<circle cx="1250" cy="450" r="3" fill="#1a2436"/>
+<circle cx="1250" cy="625" r="3" fill="#1a2436"/>
+<circle cx="1250" cy="800" r="3" fill="#1a2436"/>
+<circle cx="1425" cy="100" r="3" fill="#1a2436"/>
+<circle cx="1425" cy="275" r="3" fill="#1a2436"/>
+<circle cx="1425" cy="450" r="3" fill="#1a2436"/>
+<circle cx="1425" cy="625" r="3" fill="#1a2436"/>
+<circle cx="1425" cy="800" r="3" fill="#1a2436"/>
+</svg>

@@ -1,0 +1,26 @@
+{
+  "slug": "what-shipped-in-august",
+  "file": "assets/blog/what-shipped-in-august/banner.webp",
+  "cover": "/blog-assets/blog/what-shipped-in-august/banner.webp",
+  "dimensions": "1600x900",
+  "aspectRatio": "16:9",
+  "bytes": 22648,
+  "format": "webp",
+  "textBakedIn": false,
+  "method": {
+    "type": "deterministic-svg-pattern",
+    "generator": "generated/generate-banners.mjs (committed alongside this file)",
+    "palette": "DiCompute house palette: navy bases #0c0c0e/#0f172a/#111827/#1e293b, indigo accents #4338ca/#4f46e5/#6366f1/#818cf8/#a5b4fc (cf. console app/blog-skin.css .blog-banner-fallback-*)",
+    "aiUsed": false,
+    "vendor": null,
+    "note": "Flat SVG shapes only; every alpha is pre-composited into a flat color by the generator because ImageMagick's internal SVG renderer ignores fill-opacity/stroke-opacity. No gradients, no <text>.",
+    "exportCommand": "convert -background none generated/what-shipped-in-august/source.svg -resize '1600x900!' -quality 90 -define webp:method=6 assets/blog/what-shipped-in-august/banner.webp"
+  },
+  "sha256": {
+    "banner.webp": "b024dfe40dc7331c6f37a95cdbb079a6963675406e0a0e278a45d643c774f4db",
+    "source.svg": "dc5c4c67d272122817b3a8f7cc5c7324a0fb47f18fef823eb0784e734a674279"
+  },
+  "generatedOn": "2026-10-10",
+  "issue": "DICOMPUTE/DiCompute#17373",
+  "replaces": "/blog/what-shipped-in-august/opengraph-image (gradient fallback placeholder)"
+}

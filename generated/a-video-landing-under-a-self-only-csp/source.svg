@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<!-- a-video-landing-under-a-self-only-csp banner. Deterministic flat-shape pattern in the DiCompute house palette; alphas pre-composited (house palette: navy bases + indigo accents, cf. console app/blog-skin.css). -->
+<rect width="1600" height="900" fill="#0c0c0e"/>
+<circle cx="1180" cy="260" r="855" fill="none" stroke="#16142d" stroke-width="3"/>
+<circle cx="1180" cy="260" r="760" fill="none" stroke="#1d1d39" stroke-width="3"/>
+<circle cx="1180" cy="260" r="665" fill="none" stroke="#1c1a41" stroke-width="3"/>
+<circle cx="1180" cy="260" r="570" fill="none" stroke="#24254e" stroke-width="3"/>
+<circle cx="1180" cy="260" r="475" fill="none" stroke="#221f54" stroke-width="3"/>
+<circle cx="1180" cy="260" r="380" fill="none" stroke="#2c2d62" stroke-width="3"/>
+<circle cx="1180" cy="260" r="285" fill="none" stroke="#282467" stroke-width="3"/>
+<circle cx="1180" cy="260" r="190" fill="none" stroke="#343576" stroke-width="3"/>
+<circle cx="1180" cy="260" r="95" fill="none" stroke="#2e297b" stroke-width="6"/>
+<circle cx="120" cy="830" r="110" fill="none" stroke="#231e5b" stroke-width="4"/>
+<circle cx="120" cy="830" r="220" fill="none" stroke="#1e1a4a" stroke-width="4"/>
+<circle cx="120" cy="830" r="330" fill="none" stroke="#191639" stroke-width="4"/>
+<circle cx="120" cy="830" r="440" fill="none" stroke="#141228" stroke-width="4"/>
+<circle cx="1180" cy="260" r="70" fill="#5f61e6"/>
+<circle cx="1180" cy="260" r="95" fill="none" stroke="#68719d" stroke-width="5"/>
+<rect x="1138" y="276" width="12" height="18" fill="#18192e"/>
+<rect x="1162" y="262" width="12" height="32" fill="#18192e"/>
+<rect x="1186" y="248" width="12" height="46" fill="#18192e"/>
+<rect x="1210" y="234" width="12" height="60" fill="#18192e"/>
+<rect x="0" y="40" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="130" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="220" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="310" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="400" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="490" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="580" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="670" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="760" width="1600" height="2" fill="#12161e"/>
+<rect x="0" y="850" width="1600" height="2" fill="#12161e"/>
+</svg>
