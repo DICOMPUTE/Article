@@ -21,3 +21,15 @@ jobs:
         with:
           bun-version: "1.4.0"
       - run: bun scripts/validate.ts
+      - run: bun test ./scripts/banner/generate.test.ts
+
+  actionlint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      # A workflow file that fails to parse never runs and reports nothing
+      # (banner.yml was invalid for exactly this reason); lint them all.
+      - run: docker run --rm -v "$PWD:/repo" --workdir /repo rhysd/actionlint:1.7.7 -color
