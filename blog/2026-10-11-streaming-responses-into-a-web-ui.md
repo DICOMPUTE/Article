@@ -116,6 +116,7 @@ async function streamChat(prompt, onToken) {
     const frames = buffer.split("\n\n");
     buffer = frames.pop(); // keep a partial frame for the next read
     for (const frame of frames) {
+      if (!frame.startsWith("data:")) continue; // e.g. a ": keepalive" comment
       const data = frame.replace(/^data: ?/, "");
       if (data === "[DONE]") return;
       const json = JSON.parse(data);
@@ -127,7 +128,7 @@ async function streamChat(prompt, onToken) {
 }
 ```
 
-Frames can split across reads, which is why the buffer keeps the unfinished tail.
+Frames can split across reads, which is why the buffer keeps the unfinished tail. During a long pause between tokens the API can also send an SSE comment line, `: keepalive`, to hold the connection open. It carries no data, so the loop skips any frame that doesn't start with `data:`.
 
 ## 5. The Vercel AI SDK
 

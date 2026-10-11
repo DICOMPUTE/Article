@@ -11,7 +11,7 @@ coverAlt: "Duotone editorial illustration: ruled ledger lines crossed by small t
 
 AI coding agents in the terminal, such as Claude Code, Codex CLI and OpenCode, were among the most-adopted developer tools of 2026. All three let you point them at a different base URL, which means you can run them against an open model behind an OpenAI-compatible or Anthropic-compatible API. DiCompute exposes both shapes, plus the OpenAI Responses shape that Codex CLI wants.
 
-This post gives the exact configuration for each tool, the traps that cost people an afternoon, and an honest caveat up front. A coding agent lives on tool calling: it edits files and runs commands by emitting tool calls. The protocol support for that is built, but the two catalogue models that carry the tools vouch are not accepting requests today, and the model that is accepting, `qwen2.5-3b-instruct`, is small, CPU-served and has a 1,024-token context window. These integrations are documented, not yet run, so treat everything below as configuration you still have to verify, not a promise that an agent will edit your files reliably.
+This post gives the exact configuration for each tool, the traps that cost people an afternoon, and an honest caveat up front. A coding agent lives on tool calling: it edits files and runs commands by emitting tool calls. The protocol support for that is built, but the two catalogue models that carry the tools vouch are not accepting requests today, and the model that is accepting, `qwen2.5-3b-instruct`, is small, CPU-served and has a 1,024-token context window. These integrations are documented, not yet run. Treat everything below as configuration to have ready for when a tools-capable model is accepting, not as a working agent setup today.
 
 ## 1. Why terminal agents want a custom base URL
 
@@ -92,6 +92,8 @@ Two things get confused, so separate them:
 
 So a request carrying tools against `qwen2.5-3b-instruct` is not rejected, but nobody has checked that a small, quantized 3B model reliably decides to call a tool correctly. Don't expect agent file edits to work reliably on today's accepting models. Check `/openai/v1/models` and [/models](/models) before you plan around this, because it can change.
 
+The context window is the second wall. A terminal agent sends its own system prompt and tool definitions on every turn, and that can exceed 1,024 tokens before your request even starts. When prompt plus `max_tokens` doesn't fit, the API refuses it before billing with a `429` whose message starts `request is too large for model`. That refusal can never succeed on retry, even though an agent may treat it as a rate limit and keep trying. The [error reference](/api-console/errors) explains it.
+
 If an agent doesn't need tools, you're on firmer ground. Aider's default edit formats are plain-text over an ordinary chat completion, which is why the coding agents guide calls it the safest starting point.
 
 ## 6. Test a tool call with curl first
@@ -108,11 +110,11 @@ curl -sS https://dicompute.ai/openai/v1/chat/completions \
          "parameters":{"type":"object","properties":{"city":{"type":"string"}}}}}]}'
 ```
 
-With a good key, `finish_reason: "tool_calls"` and a well-formed `tool_calls` array mean it worked for that prompt. Plain text back means the model ignored the tool, which is a normal `200`, not an error. To check your setup without a real key, send the same request with `sk-dico-invalid-example` and you should get a `401` with `"code":"invalid_api_key"`.
+With a good key, `finish_reason: "tool_calls"` and a well-formed `tool_calls` array mean it worked for that prompt. Plain text back means the model ignored the tool, which is a normal `200`, not an error. Today plain text is the outcome to expect: the only direct-engine model reports `tools: false`, and one good tool call on one prompt is not a vouch. To check your setup without a real key, send the same request with `sk-dico-invalid-example` and you should get a `401` with `"code":"invalid_api_key"`.
 
 ## 7. Single-use setup links from /connect
 
-If you'd rather not copy config by hand, [/connect](/connect) creates a single-use setup link for a coding client. The link expires after 15 minutes and contains no key. The script reads your key from your environment, never from an argument, so you still create the key separately. Per-client steps are at [/connect.md](/connect.md).
+If you'd rather not copy config by hand, [/connect](/connect) creates a single-use setup link for a coding client. The link expires after 15 minutes and contains no key. The script reads your key from your environment (or from standard input when that is a pipe), never from an argument, so you still create the key separately. Download the script and run it rather than piping it into `sh`, because standard input is where the key comes in. Per-client steps are at [/connect.md](/connect.md).
 
 ## Where to go from here
 

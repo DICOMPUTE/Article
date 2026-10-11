@@ -49,11 +49,11 @@ curl -sS https://dicompute.ai/openai/v1/models \
   | jq -r '.data[] | select(.metadata.can_accept) | .id'
 ```
 
-Each entry has `id`, `pricing` (integer micro-USD per million tokens), `context_length`, a `capabilities` object, and `metadata.can_accept`. A model can be listed while nothing is serving it, so filter on `can_accept`. At the time of writing the feed lists five models and three of them accept requests. That will change, so read the feed rather than this sentence. The [models doc](/docs/models) describes every field, and [/pricing](/pricing) shows the same catalogue as a table. Prices come from the catalogue and can change, so don't copy them into your code. Move the model id into configuration, and resolve it at startup or per request.
+Each entry has `id`, `pricing` (integer micro-USD per million tokens), `context_length`, a `capabilities` object, and `metadata.can_accept`. A model can be listed while nothing is serving it, so filter on `can_accept`. At the time of writing the feed lists five models and three of them accept requests. Two of those three are marked `fleet_served`, and the worker fleet carries real traffic for one internal test account only today, so plan your app around `qwen2.5-3b-instruct`, the direct-engine model. That will change, so read the feed rather than this sentence. The [models doc](/docs/models) describes every field, and [/pricing](/pricing) shows the same catalogue as a table. Prices come from the catalogue and can change, so don't copy them into your code. Move the model id into configuration, and resolve it at startup or per request.
 
 ## 3. Context limits: size your prompts
 
-OpenAI-sized prompts won't fit everywhere. `qwen2.5-3b-instruct` reports `context_length: 1024`. Two other accepting models report 32,768. Before you send, count roughly and compare against the model's own `context_length`. The browser-only [token counter](/tools/token-counter) and [context check](/tools/context-check) help while you're sizing prompts by hand. Also set `max_tokens` explicitly. A request reserves its worst case up front, based on your maximum output tokens, and settles at actual usage, so a small cap keeps the reservation small too.
+OpenAI-sized prompts won't fit everywhere. `qwen2.5-3b-instruct` reports `context_length: 1024`. The fleet-served models report 32,768 or more, but see the note above before counting on them. Before you send, count roughly and compare against the model's own `context_length`. The browser-only [token counter](/tools/token-counter) and [context check](/tools/context-check) help while you're sizing prompts by hand. Also set `max_tokens` explicitly. A request reserves its worst case up front, based on your maximum output tokens, and settles at actual usage, so a small cap keeps the reservation small too.
 
 ## 4. Features to audit
 
@@ -76,7 +76,7 @@ Not every OpenAI parameter is supported, so run your real request shapes through
 Errors use the OpenAI shape, so the SDK raises its usual exceptions. A bad key is the `AuthenticationError` you know. Two additions are worth wiring into your logging and retry code:
 
 - `x-request-id`: every response, success or error, carries `req_<uuid>`. Log it. It is the handle for any dispute about a request.
-- `x-ratelimit-scope`: a `429` names which ceiling refused you. Branch on this header, not on message text, because `error.code` is coarser than `error.message`. A `429` also carries `retry-after`, in whole seconds.
+- `x-ratelimit-scope`: a `429` names which ceiling refused you. Branch on this header or on `error.message`, never on `error.code` alone, which is coarser. Some 429s carry no scope header, and one of them, `request is too large for model`, means your prompt doesn't fit the context window and must never be retried unchanged. A `429` also carries `retry-after`, in whole seconds.
 
 Two more rules matter for migrations. A `402 insufficient_quota` means balance or a spend cap, so never retry it on a timer. And a refusal before the reservation costs nothing. The [error reference](/api-console/errors) lists every condition with its meaning, fix, retry advice and billing effect, and the [rate-limits page](/docs/rate-limits) lists the scopes.
 

@@ -19,7 +19,7 @@ The classic mistake is `while True: try: call(); except: sleep(1)`. When a servi
 
 ## 2. Reading a 429
 
-Every rate-limit refusal carries the same signals:
+A rate-limit refusal from one of your own ceilings carries two signals:
 
 ```
 HTTP/1.1 429 Too Many Requests
@@ -45,9 +45,13 @@ The scope tells you what to change, so the policy can differ per scope:
 
 The `edge_burst` response comes from the edge's own limiter, so its body can differ from the usual JSON and its `retry-after` is a fixed one second. Honor the header anyway.
 
-## 4. at_capacity: fleet-wide
+## 4. at_capacity, and the 429 you must never retry
 
-One 429 has no `x-ratelimit-scope` header at all. An `at_capacity` refusal means the whole deployment's upstream capacity is full right now. It carries `retry-after` and is recognized by the message `at_capacity`. It isn't your ceiling, so lowering your own concurrency won't help, and retrying sooner elsewhere won't either. Wait for `retry-after` plus jitter. Compare that with `account_concurrency`, where reducing your own parallelism is the fix.
+Some 429s have no `x-ratelimit-scope` header at all, so you recognize them by `error.message`. Two matter most.
+
+An `at_capacity` refusal means every worker that serves the model is busy right now. It carries `retry-after` and is recognized by the message `at_capacity`. It isn't your ceiling, so lowering your own concurrency won't help. The [error reference](/api-console/errors) calls it the one 429 where a plain backoff loop is the right behavior: wait for `retry-after` plus jitter and resend unchanged. Compare that with `account_concurrency`, where reducing your own parallelism is the fix.
+
+A message that starts `request is too large for model` is the opposite. Your prompt plus `max_tokens` exceeds the model's context window, which is 1,024 tokens for `qwen2.5-3b-instruct` at the time of writing (read `context_length` from `/openai/v1/models`). It arrives as a 429 with a `retry-after` header, but it can never succeed unchanged. Shrink the prompt or lower `max_tokens`. A loop that retries every 429 burns its whole budget on this one, then reports "rate limited" for a request that was simply too big.
 
 ## 5. 402: never retry on a timer
 
@@ -92,11 +96,13 @@ def chat(messages, max_tokens=128):
         except openai.RateLimitError as e:
             scope = e.response.headers.get("x-ratelimit-scope")  # None for at_capacity
             retry_after = int(e.response.headers.get("retry-after", "1"))
+            if "request is too large for model" in str(e):
+                raise  # prompt + max_tokens exceed the context window: shrink, don't retry
             if scope == "auth_failures" or attempt == MAX_ATTEMPTS - 1:
                 raise  # a wrong credential won't fix itself
             # honor retry-after, then add jitter so clients don't retry in lockstep
             delay = retry_after + random.uniform(0, 1 + 0.25 * retry_after)
-            print(f"429 scope={scope or 'at_capacity'} "
+            print(f"429 scope={scope or 'none'} "
                   f"request_id={e.response.headers.get('x-request-id')} wait={delay:.1f}s")
             time.sleep(delay)
         except openai.APIStatusError as e:
@@ -117,7 +123,7 @@ def chat(messages, max_tokens=128):
             return raw.parse()
 ```
 
-A few choices are worth explaining. `AuthenticationError` and `RateLimitError` are both subclasses of `APIStatusError`, so the order of the `except` clauses matters: a 401 falls through to the status branch and is raised at once, which is what you want. The `print` line logs `x-request-id`, the first thing you'll need for any follow-up. And the wrapper retries only 500, 502, 503 and 504, never other 4xx errors, because a `400` will fail identically on every attempt.
+A few choices are worth explaining. `AuthenticationError` and `RateLimitError` are both subclasses of `APIStatusError`, so the order of the `except` clauses matters: a 401 falls through to the status branch and is raised at once, which is what you want. The too-large check runs before any wait, because that 429 can't succeed on retry. The `print` line logs `x-request-id`, the first thing you'll need for any follow-up. And the wrapper retries only 500, 502, 503 and 504, never other 4xx errors, because a `400` will fail identically on every attempt.
 
 To prove your setup without spending anything, run this with the key above left as an obviously invalid value. You should get a `401`, raised on the first attempt with no waiting.
 

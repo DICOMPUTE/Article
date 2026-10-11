@@ -11,7 +11,7 @@ coverAlt: "Duotone editorial illustration: ruled ledger lines crossed by small t
 
 OpenTelemetry's generative-AI conventions and LLM observability tooling matured quickly in 2026. The idea is simple: a call to a model is a dependency like a database or a payment API, so it belongs in the same traces as the rest of your request. DiCompute has a feature for this, and this post shows how to use it and where it stops.
 
-It is for developers who already run an OpenTelemetry collector or a tracing backend. Here is the honest scope first. The feature is a pull: for a request whose id you already have, you can fetch that request's spans as OTLP JSON and forward them to your collector yourself. This post describes only that pull route. It captures no prompt or response text. And it is not a stream of every request: you have to ask for each one.
+It is for developers who already run an OpenTelemetry collector or a tracing backend. Here is the honest scope first. What this post covers is a pull: for a request whose id you already have, you can fetch that request's spans as OTLP JSON and forward them to your collector yourself. The docs currently disagree about whether an account-level push destination exists, so this post sticks to the pull route and you shouldn't plan around push until they agree. The export captures no prompt or response text. And it is not a stream of every request: you have to ask for each one.
 
 ## 1. Why LLM calls need tracing
 
@@ -50,7 +50,7 @@ curl -sS "https://dicompute.ai/openai/v1/account/usage/requests/$REQUEST_ID/otlp
   -H "authorization: Bearer $DICO_KEY"
 ```
 
-The response is an OTLP/HTTP JSON `ExportTraceServiceRequest`. The [billing docs](/docs/billing) describe it as the same reconstruction as the plain request-lookup route, reshaped: one span per dispatch attempt, with the model, final status, token counts and time to first token as span attributes. They are the same numbers the plain route returns, not a second derived copy. The [usage and limits page](/docs/usage-and-limits) lists the neighbouring introspection routes.
+The response is an OTLP/HTTP JSON `ExportTraceServiceRequest`. The [billing docs](/docs/billing/reconstructing-a-request) describe it as the same reconstruction as the plain request-lookup route, reshaped: one span per dispatch attempt, with the model, final status, token counts and time to first token as span attributes. They are the same numbers the plain route returns, not a second derived copy. The [usage and limits page](/docs/usage-and-limits) lists the neighbouring introspection routes.
 
 Some rules to know:
 
@@ -121,7 +121,7 @@ Then forward the spans with the function above and look the trace up in your bac
 
 Use it for latency and failure analysis on individual requests: how many attempts a request made, which one failed, how long the first token took, how many tokens it used. Keep these limits in mind:
 
-- **Pull only.** You fetch per request id. This post doesn't describe any automatic delivery of spans to a destination you configure, and you shouldn't build on one.
+- **Pull, per request.** You fetch by request id. The billing docs say there is no account-configured push destination yet, while the usage docs describe one. Until the docs agree, don't build on automatic delivery.
 - **Metadata only.** There's no prompt or response text anywhere in the payload.
 - **No worker identity.** You see attempts and their outcomes, not which machine served them.
 - **Only as available as the flag.** Check `otel_span_export` in the capabilities feed, and handle the `501`.
@@ -130,7 +130,7 @@ For the dashboard view, the usage endpoints give you spend and request history, 
 
 ## Next steps
 
-- [Billing](/docs/billing): reconstructing a request, and the OTLP route.
+- [Billing](/docs/billing): its "Reconstructing a request" part covers the plain lookup and the OTLP route.
 - [Usage and limits](/docs/usage-and-limits): the introspection routes that answer "what happened to my spend".
 - [API reference](/api-console): the interactive reference.
 - [Building on the DiCompute API](/blog/building-on-the-dicompute-api): where `x-request-id` fits into the basic integration.
