@@ -5,7 +5,8 @@ date: 2026-10-11
 authors: [DiCompute team]
 tags: [guides, providers, dico-agent]
 categories: [engineering]
-cover: /blog/running-a-dicompute-provider-node/opengraph-image
+cover: /blog-assets/blog/running-a-dicompute-provider-node/banner.webp
+coverAlt: "Duotone editorial illustration: a tilted orbit ring around a solid point, with a second point travelling the ring, picked out in accent; a cyan accent on a deep ink field."
 ---
 
 DiCompute has two sides. People and apps send requests to open AI models, and

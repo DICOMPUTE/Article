@@ -5,7 +5,8 @@ date: 2026-10-11
 authors: [DiCompute team]
 tags: [guides, console, chat]
 categories: [product]
-cover: /blog/using-dicompute-day-to-day/opengraph-image
+cover: /blog-assets/blog/using-dicompute-day-to-day/banner.webp
+coverAlt: "Duotone editorial illustration: a tilted orbit ring around a solid point, with a second point travelling the ring, picked out in accent; an amber accent on a deep ink field."
 ---
 
 You don't need to write code to use DiCompute. The console is a chat window

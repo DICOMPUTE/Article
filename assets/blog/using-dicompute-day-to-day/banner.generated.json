@@ -1,0 +1,26 @@
+{
+  "engine": "article-banner/1",
+  "generator": "scripts/banner/generate.ts",
+  "seed": 821676676,
+  "seedSuffix": "",
+  "generatedAt": "2026-10-11T12:16:40.491Z",
+  "brief": {
+    "title": "Using DiCompute day to day",
+    "motif": "orbit",
+    "motifMatched": [
+      "model",
+      "compute"
+    ],
+    "accentCategory": "product",
+    "accent": "#f09249",
+    "composition": "one focal motif right of centre in the upper 60%, calm lower 40%, flat duotone with uniform film grain"
+  },
+  "checks": {
+    "width": 1600,
+    "height": 900,
+    "bytes": 9188,
+    "maxBytes": 307200,
+    "lower40ContrastVsWhite": "19.62:1",
+    "ocr": "not applicable -- engine A renders no text layers"
+  }
+}

@@ -5,7 +5,8 @@ date: 2026-10-11
 authors: [DiCompute team]
 tags: [guides, api, openai-compatible]
 categories: [engineering]
-cover: /blog/building-on-the-dicompute-api/opengraph-image
+cover: /blog-assets/blog/building-on-the-dicompute-api/banner.webp
+coverAlt: "Duotone editorial illustration: ruled ledger lines crossed by small tally groups, one group picked out in accent; a cyan accent on a deep ink field."
 ---
 
 DiCompute's API is OpenAI-compatible. If your app already talks to the OpenAI
