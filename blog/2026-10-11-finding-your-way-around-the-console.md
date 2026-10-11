@@ -63,7 +63,7 @@ any time.
 
 ## The command palette
 
-Press **⌘K** to open the command palette. It lists
+Press **⌘K** (Ctrl+K on Windows and Linux) to open the command palette. It lists
 every page, in both modes, and you can type to narrow it. The sidebar's search
 box is labeled "Search everywhere ⌘K", which is the same idea.
 
@@ -72,7 +72,8 @@ palette. That badge isn't a lock. You can open the page, and the badge only tell
 you it lives in the longer list. If you're ever hunting for a page, the palette
 is faster than clicking through menus.
 
-The sidebar also collapses with ⌘B when you want more room for the chat.
+The sidebar also collapses with ⌘B (Ctrl+B) when you want more room for the
+chat.
 
 ## Your mode follows you
 
@@ -105,6 +106,13 @@ chat costs before you run a long one.
 
 Things that are not in the console today: voice input, read-aloud and web search
 are all switched off, so don't hunt for them.
+
+## When you get stuck
+
+[Help](/help) is built around the questions people actually ask. Each one links
+to the page that answers it, and its search box starts scoped to help but can
+widen to the docs, the blog and the changelog. The [chat guide](/docs/chat) is the full reference for what a
+chat can do.
 
 ## Where to go from here
 

@@ -32,9 +32,9 @@ alongside your chats: they follow your account, so they show up on the other
 devices you sign in on.
 
 The **Library** sits next to Projects in the sidebar. It holds the things you
-reuse rather than the things you discuss, such as saved prompts, presets and
-artifacts. If you find yourself pasting the same instructions at the start of
-every chat, that is a saved prompt waiting to happen.
+reuse rather than the things you discuss: your saved prompts, searchable and
+ready to drop into any chat. If you find yourself pasting the same instructions
+at the start of every chat, that is a saved prompt waiting to happen.
 
 A simple rule works well: if you expect to come back to a topic more than twice,
 give it a project.

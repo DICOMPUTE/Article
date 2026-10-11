@@ -46,9 +46,16 @@ That makes it the right place for the facts you can check:
 ## The arena
 
 The blind arena is on the compare page, and [/models/arena](/models/arena)
-explains the ranking it feeds. It works like this: two models answer the same
-prompt with their names hidden, and you pick the answer you think is better.
-You write the prompt, so the test is about your task.
+explains the ranking it feeds. It works like this: two models picked at random
+from your comparison answer the same prompt with their names hidden, and you
+pick the answer you think is better. The names are revealed only after you
+vote. You write the prompt, so the test is about your task.
+
+Two practical points before you start. You need to be signed in to run a pair
+and vote. And there is no free arena lane: both answers are ordinary requests,
+billed at each model's own rate. The page shows an estimate of the input cost
+per run before you send, and output is charged on top. Compare models that are accepting requests, or one side of the
+pair has nothing to say.
 
 ## Why blind voting beats brand loyalty
 

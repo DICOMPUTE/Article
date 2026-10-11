@@ -80,7 +80,8 @@ guess a nearby one, but that does nothing if the URL itself is forwarded or
 pasted somewhere public. The link also sits in the URL path, so it can end up in
 browser history.
 
-If you worry about who has seen a link, revoking it is the remedy.
+If you worry about who has the link, revoke it. That stops anyone from opening
+it again, but it can't take back what someone has already read or copied.
 
 ## A checklist before you share
 

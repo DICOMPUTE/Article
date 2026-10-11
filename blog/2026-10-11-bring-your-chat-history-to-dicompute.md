@@ -44,8 +44,9 @@ refuses zip archives (with a clear reason) and wants the JSON file itself. The
 [data export docs](/docs/data-export) describe the import in full, including
 the exact file names.
 
-You don't need to tell DiCompute where the file came from. It detects the
-source when you leave that out.
+To run the import, sign in and open **Settings → Privacy**. The **Import
+chats** card has a file picker: choose the JSON file and the import starts. You don't need to tell DiCompute where the file came from. It
+detects the source for you.
 
 ## What import does
 
