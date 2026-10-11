@@ -42,7 +42,7 @@ It deliberately leaves out some things:
 - **File bytes.** Uploaded files appear as metadata (name, size and so on), not the files themselves.
 - **Provider session history.** The docs state this is a known gap, and the export says so instead of showing an empty list.
 
-The export also carries an integrity checksum, so you can tell if it was altered.
+The export also carries an integrity checksum, signed when the service has a signing key set up, so you can check that it hasn't been changed since.
 
 ## Deleting chats: archive versus delete
 
@@ -63,7 +63,7 @@ The [storage guide](/docs/storage) lists what DiCompute keeps for you: avatars a
 
 For retention, the honest answer is to read the sources, not a summary here. The [privacy expectations](/docs/privacy-expectations) page carries a published retention schedule per kind of log. Request metadata logs, which record things like account, model and outcome and never prompt text, are rotated daily and kept for 14 days, according to that page. For chat content and anything else, follow the docs, because we won't state periods they don't state.
 
-Two reminders about privacy today. DiCompute's sealed lane, which would hide prompts from the operator, is built but switched off, so the operator can read prompts and replies. And no model on the list offers zero data retention. Keep sensitive material out of chats. The [trust page](/trust) gives the wider picture.
+Two reminders about privacy today. The operator can read prompts and replies. DiCompute's sealed lane, which would hide them from the network edge in front of the service, is built but switched off, and even sealed, the service reads a prompt in order to run it. And no model on the list offers zero data retention. Keep sensitive material out of chats. The [trust page](/trust) gives the wider picture.
 
 ## Moving to or from another assistant
 

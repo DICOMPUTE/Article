@@ -50,7 +50,7 @@ You can also ask for sources, but treat them as search terms. "Which source shou
 If two independent attempts agree, that raises your confidence. If they disagree, you've found something to look into. Two cheap ways to do it:
 
 - **Fresh chat, same question.** Open a new chat and ask again without the previous conversation. If the facts change between attempts, don't trust either version.
-- **A different model.** Ask the same thing of another model from the picker. The [model comparison page](/models/compare) is one place to look at the options side by side.
+- **A different model, if one is accepting requests.** Ask the same thing of another model. Today most requests are served by one model, `qwen2.5-3b-instruct`, so check [/models](/models) first to see whether another is available. The [model comparison page](/models/compare) is one place to look at the options side by side.
 
 Agreement is a weak signal, not a guarantee. Models trained on similar text can share the same mistake. Use cross-checking to catch the loose errors, and use an outside source for anything that matters.
 
@@ -73,7 +73,7 @@ Some situations are not worth the risk, however good the routine:
 
 - Decisions about your health, legal rights, taxes or safety. Use the model to prepare questions, then go to a qualified person.
 - Anything where a mistake is costly and hard to undo, and you can't check the answer independently.
-- Regulated or confidential data. The privacy side matters too: DiCompute's sealed (end-to-end) lane is built but switched off, so the operator can read prompts and replies. Keep passwords and other people's personal data out of any chat. The [trust page](/trust) lays out the details.
+- Regulated or confidential data. The privacy side matters too: the operator can read prompts and replies. DiCompute's sealed lane, which would hide them from the network edge in front of the service, is built but switched off, and even sealed, the service itself reads a prompt in order to answer it. Keep passwords and other people's personal data out of any chat. The [trust page](/trust) lays out the details.
 - Work you are asked to do yourself, such as an exam or an assignment where AI use is not allowed.
 
 ## Where to go from here

@@ -72,7 +72,7 @@ Remember that the allowlist only helps if the models you allow are accepting req
 - **A per-seat invoice.** Billing is pooled spend, not an invoice per user.
 - **Certifications.** DiCompute holds none, and the [trust page](/trust) says so.
 
-Also remember what the operator can see. DiCompute's sealed lane, which would hide prompts from the service operator, is built but off. Tell your team not to paste passwords, customer data or anything confidential.
+Also remember what the operator can see: prompts and replies. DiCompute's sealed lane, which would hide them from the network edge but not from the service itself, is built but off. Tell your team not to paste passwords, customer data or anything confidential.
 
 ## Where to go from here
 

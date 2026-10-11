@@ -39,7 +39,7 @@ Fixes to try, in order:
 
 The [token counter](/tools/token-counter) and [context check](/tools/context-check) tools run in your browser, and the text you type never leaves the page.
 
-Also keep in mind that small models make mistakes and sometimes miss instructions even when everything fits. If one rewording doesn't help, try a different model.
+Also keep in mind that small models make mistakes and sometimes miss instructions even when everything fits. If one rewording doesn't help, try a different model, if another one is accepting requests.
 
 ## A model isn't accepting requests
 
@@ -53,7 +53,7 @@ If a model fails every time, check that page and the feed, then pick another mod
 
 How to read it:
 
-- If a model is marked degraded, that is a hint that its failures aren't your fault. Try another model, or wait.
+- If a model is marked degraded, that is a hint that its failures aren't your fault. Try another model if one is accepting, or wait.
 - If everything reads healthy and one chat still fails, the cause is more likely in the chat itself: its length, your message or your balance.
 
 DiCompute has no contractual SLA, and we don't quote an uptime figure here. The status page is the live source.

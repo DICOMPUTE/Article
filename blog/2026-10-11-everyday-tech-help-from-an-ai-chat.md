@@ -74,7 +74,7 @@ A short list of questions for a friend, a colleague or the vendor's support line
 
 ## Keeping secrets out of tech-support chats
 
-The chat is not a private conversation with a single trusted person. DiCompute's sealed lane, which would hide prompts from the people operating the service, is built but switched off. The operator can read prompts and replies. Messages travel over TLS, but that protects them in transit, not from the service itself. The [trust page](/trust) and the [privacy expectations](/docs/privacy-expectations) page set out who can see what.
+The chat is not a private conversation with a single trusted person. The operator can read prompts and replies. Messages travel over TLS, but that protects them in transit, not from the service itself. DiCompute's sealed lane, which would also hide prompts from the network edge in front of the service, is built but switched off, and it would not hide them from the service either. The [trust page](/trust) and the [privacy expectations](/docs/privacy-expectations) page set out who can see what.
 
 So, in any tech-help chat, leave out:
 

@@ -61,7 +61,7 @@ Read them with a skeptical eye, then compare what they say with this post. Where
 Decentralization is not a privacy guarantee, and that is true here. A few facts:
 
 - Your messages travel over TLS, which protects them in transit.
-- DiCompute's sealed lane, designed to hide prompts from the people running the service, is built but switched off. The operator can read prompts and replies.
+- The operator can read prompts and replies. DiCompute's sealed lane, designed to hide prompts from the network edge in front of the service, is built but switched off. Even sealed, the service still reads a prompt in order to run it.
 - If a request is ever routed to a provider's machine, that provider would also be able to read it. The [privacy expectations](/docs/privacy-expectations) page covers this, including that a provider's own statements about not keeping data are self-reported and unchecked.
 - No model on the list offers zero data retention.
 
