@@ -58,7 +58,7 @@ Run `dico-agent preflight` first if you want a no-account check of your hardware
 
 ## Recognized M-series capacity classes on /earn
 
-The [earnings page](/earn) has a "Recognized hardware" table. It maps a verified GPU model to the largest capacity class the network recognizes for it. As of this post, the table includes Apple chips: M5-ULTRA at 512GB, M2-ULTRA at 192GB, M1-ULTRA at 128GB, and the M3, M4 and M5 Max chips at 128GB, next to H100 and other data-center cards. Absence from the table means a model is not recognized at all. When I queried the public lookup that `join` uses, an Apple M3 Ultra string returned `recognized: false`.
+The [earnings page](/earn) has a "Recognized hardware" table. It maps a verified GPU model to the largest capacity class the network recognizes for it. As of this post, the table includes Apple chips: M5-ULTRA at 512GB, M2-ULTRA at 192GB, M1-ULTRA at 128GB, and the M3, M4 and M5 Max chips at 128GB, next to H100 and other data-center cards. Absence from the table means a model is not recognized at all. When we queried the public lookup that `join` uses, an Apple M3 Ultra string returned `recognized: false`.
 
 Read that table carefully. The hardware docs say `join` prints whether your detected GPU resolves to an entry, and that this shows what your hardware *would* be recognized for once hardware attestation exists. It is not a claim that anything is being enforced or paid against it today. The table can also change, so treat [/earn](/earn) as the source of truth.
 
@@ -73,7 +73,7 @@ A provider node is only useful while it is running, and a Mac's default is to sl
 - The agent reconnects by itself after a coordinator-side disconnect, so a network blip doesn't need a manual restart.
 - The installer drops a "DiCompute Agent Status" launcher in `~/Applications`. Double-click it to run `dico-agent status`.
 
-Self-updates run on a schedule; see [upgrading](/docs/provider/upgrading) in the provider docs.
+Updates don't happen by themselves. Nothing fetches a new release unless you run `dico-agent update`, or opt in to a periodic check with `dico-agent update --auto on`; see [upgrading](/docs/provider/upgrading) in the provider docs.
 
 ## Expectations today
 

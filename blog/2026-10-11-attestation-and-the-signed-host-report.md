@@ -64,11 +64,13 @@ curl -sS https://dicompute.ai/v1/attestation | jq '.data[0] | {status, trustLeve
 
 ## Trust tiers, and the aggregate
 
-Trust comes in tiers. The docs say the worker-level tier is `self_signed` when the worker presented a key-binding signature that checked out, or `none`. They state outright that there is no "hardware" tier yet, because that would need a device-certificate verification pipeline that does not exist in the codebase.
+Trust comes in tiers, and the two public feeds report them differently. In the per-worker feed above, `trustLevel` is `self_signed` when the worker presented a key-binding signature that checked out, or `none`. The docs say that feed deliberately reports nothing stronger than `self_signed`, and that there is no "hardware" tier yet, because that would need a device-certificate verification pipeline that does not exist in the codebase.
 
-`GET https://dicompute.ai/v1/providers/attestation` gives the aggregate. At the time of writing it reports six workers, all counted in a tier called `pinned` (the individual worker records I looked at show `self_signed`), and it shows `integrity_enforced: false`. That last field matters: a confirmed mismatch in a worker's code or weights degrades its routing, but the docs say excluding such a worker is off by default, behind two operator switches that ship disabled. Don't read the feed as saying integrity is enforced, because it isn't. The numbers there change, so check the feed rather than this post.
+`GET https://dicompute.ai/v1/providers/attestation` gives the aggregate: counts per tier, with no worker ids. It uses one more tier, `pinned`, which is about identity continuity. The security model docs describe the two things behind it. Your identity key is pinned across reconnects: the coordinator keeps a trust-on-first-use record of the signing key your worker id used the first time it connected, and closes a later connection that presents a different key. And a worker with a confirmed integrity mismatch is never counted at the `pinned` level. So `pinned` says "same key as before, no failed integrity check". It is not a hardware guarantee either. That is why the aggregate can count a worker as `pinned` while its own record in the per-worker feed reads `self_signed`.
 
-To see which of your own machine's facts the platform holds, sign in and open [/providers](/providers). The docs say it shows exactly what your machine reported.
+The aggregate also shows `integrity_enforced: false`. Don't read the feed as saying integrity is enforced, because it isn't. The docs say a worker with a confirmed code or weights mismatch stays routable by default, just never at the `pinned` level, and that removing it from routing sits behind operator switches that ship disabled. The counts in this feed change, so check it rather than this post.
+
+To see which of your own machine's facts the platform holds, sign in and open [/providers](/providers). The [operate page](/operate) says you can see exactly what was reported there, and that DiCompute operators can read it too.
 
 ## Periodic re-challenge
 

@@ -13,7 +13,7 @@ Benchmarking consumer GPUs for language models was a constant topic in 2026's lo
 
 This post shows how to measure it with `dico-agent benchmark`, what changes the result, and what to do with the number. It is for providers who already have an engine running. The commands are quoted from the [CLI reference](/docs/provider/cli-reference) and the [hardware requirements](/docs/provider/hardware-requirements) page, and we did not run them while writing this post, so confirm them against the docs for your agent version.
 
-I'm not going to quote a tokens-per-second figure here, for any hardware. A number from someone else's machine tells you little about yours, which is the point of this post.
+This post doesn't quote a tokens-per-second figure for any hardware. A number from someone else's machine tells you little about yours, which is the point of this post.
 
 A status note first. The [earnings estimator](/earn) is "a projection, not a payout". Serving doesn't earn anything today, the fleet path carries real traffic for one internal test account only, and a new worker sitting at zero requests is normal. A benchmark helps you understand your hardware. It doesn't promise any income.
 
@@ -94,7 +94,7 @@ Two things to keep in mind. First, utilization is "your guess": the page says Di
 
 The number you measure also has a second life. Once a connected worker has done real work, the agent's signed heartbeat carries its observed decode speed, next to the worker id, its running and waiting request counts and a timestamp. The [security model](/docs/provider/security-model) lists the heartbeat's fields and notes that the decode speed appears only once non-zero work has actually happened.
 
-So a benchmark isn't a certificate you hand in. Your own measurement is for your own decisions, and the network's view of your speed comes from real serving. How a worker's speed feeds into routing is covered by the [reputation docs](/docs/provider/reputation), which also say whether reputation changes the traffic it gets.
+So a benchmark isn't a certificate you hand in. The signed speed comes from real serving. The CLI reference does say a full heartbeat can also carry your benchmark figure as optional telemetry outside that signed core, and that without a speed figure the router ranks a warming-up worker on a fleet-wide median for longer. `AGENT_HEARTBEAT_DETAIL=minimal` strips that optional telemetry if you'd rather not send it. How a worker's speed feeds into routing is covered by the [reputation docs](/docs/provider/reputation), which also say whether reputation changes the traffic it gets.
 
 ## Next steps
 

@@ -34,7 +34,7 @@ Per the channel table, these leave your machine:
 | Update and crash reports | On a self-update, rollback or crash loop | Worker id plus version and build identifiers. | None. |
 | Log bundle | Only when you run `dico-agent logs upload` | A compressed tail of the agent log. | Never sent unless you run it. |
 
-Connecting also sends your chosen payout wallet address and a signature binding it to your worker id. That is why the docs say the platform links your worker to your wallet from your first connection, before anything is paid. The host report itself is explained in the security model docs.
+If you have set a payout wallet address, connecting also sends it with a signature binding it to your worker id. That is why the docs say the platform links your worker to your wallet from your first connection, even though nothing is paid today. The host report itself is explained in the security model docs.
 
 ## What the coordinator stores about your worker, and for how long
 
@@ -47,7 +47,7 @@ The [data-recorded page](/docs/provider/data-recorded) lists the coordinator's w
 - **Served-request outcomes:** timestamps, model, final status and error class, kept 30 days by default. These are outcomes, not content.
 - **Payout address pin:** kept without a time limit.
 
-Your network address is used in memory for rate limiting and admission checks. The docs say it is never written to a log line or to any durable store listed above. Retention periods are operator-tunable defaults, so read the page for current values.
+Your network address is used in memory for rate limiting and admission checks. The docs say it is never written to a structured log line or to any durable store listed above. Retention periods are operator-tunable defaults, so read the page for current values.
 
 ## Install telemetry: opt-in only
 

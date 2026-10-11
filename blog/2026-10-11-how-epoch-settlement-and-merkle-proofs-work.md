@@ -15,13 +15,13 @@ Read this part first, because the design is further along than the money. The se
 
 So this is an explanation of a design you can inspect, not a way to get paid. For the rest of the provider side, see [Running a DiCompute provider node](/blog/running-a-dicompute-provider-node).
 
-## Why batch payments into epochs
+## Why settle in epochs
 
-Imagine paying a provider for each request it serves. Each payment would be tiny, and each on-chain transaction costs gas. The cost of recording one request could exceed the request's value.
+Imagine recording every request a provider serves on-chain, one by one. Each entry would be tiny, and each on-chain transaction costs gas, so recording one request could cost more than the request is worth.
 
 An epoch is a fixed settlement window. Instead of one transaction per request, the coordinator closes a window, adds everything up and commits one summary to the chain. The guide says this changed during development: the Merkle leaf used to be one per request, "each worth a fraction of the gas needed to claim it", and is now one per worker per epoch. You serve one request or ten thousand, and you claim once.
 
-A consequence the guide spells out: small epochs carry over instead of paying out. If a worker's total for an epoch is below a minimum, it gets no leaf, and the amount rolls into the next epoch's input until it crosses the line. The guide says that "nothing to claim" for several epochs in a row is the system working, not a bug.
+A consequence the guide spells out: small epochs carry over instead of producing a claim. If a worker's total for an epoch is below a minimum, it gets no leaf, and the amount rolls into the next epoch's input until it crosses the line. The guide says that "nothing to claim" for several epochs in a row is the system working, not a bug.
 
 ## The six steps, from receipt to claim
 
@@ -34,7 +34,7 @@ The claiming guide sets out the pipeline in six steps:
 5. **Publication.** Your proof and the coordinator's signed attestation are published for that epoch.
 6. **Claim.** You fetch your proof, check it, sign it and submit the claim.
 
-A few conditions apply. A worker with no registered payout wallet is left out of settlement entirely, with no leaf at all, so register one before you expect anything to settle (the [quickstart](/docs/provider/quickstart) shows `dico-agent config set AGENT_WALLET_ADDRESS`). Registration is write-once: the coordinator pins the first address it sees for the worker, and a different address on a later connection is refused. Your amount is also the listed price net of the platform fee held back at settlement. The Your rates card on your fleet dashboard shows gross, fee and net per model, so this post doesn't repeat any rate.
+A few conditions apply. A worker with no registered payout wallet is left out of settlement entirely, with no leaf at all, so register one before you expect anything to settle (the [quickstart](/docs/provider/quickstart) shows `dico-agent config set AGENT_WALLET_ADDRESS`). Registration is write-once: the coordinator pins the first address it sees for the worker, and a different address on a later connection is refused. The amount recorded for you is the listed price minus a platform fee held back at settlement. The **Your rates** card on [/providers](/providers) shows gross, fee and net per model, so this post doesn't repeat any rate.
 
 Uptime rewards, the optional "base rewards", exist in code and are switched off. [/openai/v1/base-rewards/status](/openai/v1/base-rewards/status) reads `{"enabled":false}`.
 
@@ -50,7 +50,7 @@ You don't have to trust the coordinator's say-so. The guide describes a proof ch
 2. Rebuilds the root your proof implies, using a port of the contract's Merkle check.
 3. If you give it a chain RPC address and the settlement contract address, reads the root the contract actually has for that epoch and compares. The guide calls this "the check that matters", because a bundle can be perfectly self-consistent and still be a lie if that root was never committed.
 
-The guide's shape for the inputs is a proof bundle fetched with your account key, plus the contract address and an RPC URL:
+The guide's inputs are your proof bundle from the coordinator, plus the contract address and an RPC URL. Its fetch step, quoted as published (`<coordinator>` and `<epoch>` are placeholders):
 
 ```bash
 curl -H "Authorization: Bearer $DICO_KEY" \
