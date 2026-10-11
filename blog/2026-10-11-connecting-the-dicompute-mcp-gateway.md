@@ -17,7 +17,7 @@ Read the status first. The three client integrations are labelled "Documented, n
 
 MCP is a small JSON-RPC protocol. A client asks a server which tools it offers (`tools/list`) and then calls them (`tools/call`). Without a gateway, each MCP server you use is a separate process or URL, each with its own credentials, and every client you own needs its own copy of that list.
 
-A gateway turns that into one URL and one key. You install MCP servers once, in DiCompute. Every client you point at the gateway sees the same tools. Rotate the key in one place and every client has to follow, which is also the argument for giving each client its own key (see [scoped API keys and spend caps](/docs/api-keys) for how).
+A gateway turns that into one URL and one key. You install MCP servers once, in DiCompute. Every client you point at the gateway sees the same tools. Rotate the key in one place and every client has to follow, which is also the argument for giving each client its own key (see [API keys](/docs/api-keys) for how).
 
 ## The endpoint and auth
 
@@ -43,7 +43,7 @@ claude mcp add --transport http dicompute https://dicompute.ai/openai/v1/mcp \
   --header "Authorization: Bearer $DICO_API_KEY"
 ```
 
-Your shell expands the variable, so the key appears in that one command's arguments. Run it from a shell you trust, or edit the `.mcp.json` file it writes and keep the key out of your shell history. `claude mcp list` shows whether the server connected.
+Your shell expands the variable, so the key appears in that one command's arguments. Run it from a shell you trust, or add the entry to Claude Code's MCP config file by hand to keep the key out of your shell history. `claude mcp list` shows whether the server connected.
 
 This is separate from pointing Claude Code's own model traffic at DiCompute, which uses different environment variables. [Coding agents](/docs/coding-agents) covers that.
 

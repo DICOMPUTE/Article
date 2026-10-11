@@ -85,11 +85,11 @@ An empty body returns `400 invalid_request` with the message "request body is no
 The verification doc lists its own limits, and they are worth reading before you rely on a `valid: true`:
 
 - The direct-to-engine path has no receipt, so for most traffic your check is the arithmetic above.
-- A `valid: true` verdict shows the two signatures agree with each other. There is no independent public source for the coordinator's signing key, so it does not prove the key is DiCompute's.
+- A `valid: true` verdict shows only that the two signatures match the public keys carried inside the receipt. A receipt forged with someone else's keys would pass too, so it does not prove the keys are DiCompute's.
 - The `request_id` inside a receipt is not covered by either signature, so a genuine receipt could be attached to a different response.
 - There is no self-serve replay of a request.
 
-Cross-check the worker's key against `GET https://dicompute.ai/v1/attestation/<workerId>` as the doc describes, which is the one step that stops a receipt from vouching for itself.
+So cross-check both keys yourself. Compare `worker_signing_pubkey` with `signingPubkeyHex` from `GET https://dicompute.ai/v1/attestation/<workerId>`, as the doc describes, and `coordinator_signing_pubkey` with the key that `GET https://dicompute.ai/v1/attestation/coordinator` publishes. That is the step that stops a receipt from vouching for itself.
 
 ## Next steps
 

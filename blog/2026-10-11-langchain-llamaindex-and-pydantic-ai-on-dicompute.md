@@ -23,7 +23,7 @@ Three habits carry across all three:
 - Use `qwen2.5-3b-instruct`, the model the direct engine serves. Its context window is 1,024 tokens, so set a small `max_tokens`.
 - Call from your server. Authenticated routes send no CORS headers, so a browser cannot call them.
 
-You also no longer need a `User-Agent` override. An edge rule once blocked the OpenAI SDK's default user agent. The frameworks doc says it was lifted on 2026-09-15 and the integration pages re-checked it on 2026-09-27. Plain `urllib` scripts without a user agent still get a `403` from the edge, so set one there.
+You also no longer need a `User-Agent` override. An edge rule once blocked the OpenAI SDK's default user agent. The frameworks doc says it was lifted on 2026-09-15 and re-checked with the SDK user agents on 2026-09-27. Plain `urllib` scripts without a user agent still get a `403` from the edge, so set one there.
 
 ```bash
 export DICO_API_KEY="sk-dico-..."   # your key; never commit it
@@ -118,7 +118,7 @@ We ran the three snippets above this way with the packages named in the install 
 Frameworks make more requests than the code you wrote suggests. A chain with a retry policy, an agent that loops, or a retriever that re-queries can each multiply the number of calls behind one `invoke`. Three habits keep that visible:
 
 - Give the framework its own key, with a spend cap, so a runaway loop stops at a ceiling you chose. [API keys](/docs/api-keys) explains caps and scopes.
-- Set a retry count you understand. The `max_retries=0` above is for testing. In production, retry only on `429` and `5xx` responses, honor `retry-after`, and never retry a `402`, which means your balance or cap is exhausted.
+- Set a retry count you understand. The `max_retries=0` above is for testing. In production, retry only on `429` and `5xx` responses, honor `retry-after`, and never retry a `402`, which means your balance or cap is exhausted. One `429` is not worth retrying either: a prompt too big for the model's window comes back as a `429`, and only a smaller request fixes it.
 - Log the `x-request-id` header from each response. It is the key for any billing or reliability question later, and most framework callbacks can surface response headers.
 
 Every request is billed at least $0.0001, so many tiny framework calls still add up. [Pricing](/pricing) shows the live rates, and the estimate endpoint prices a request before you send it.

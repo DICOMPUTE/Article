@@ -119,7 +119,7 @@ Make the insert and the work atomic if you can, or make the work idempotent. Ret
 
 All management routes need a key with `billing:read` or `billing:write`. A default key has `inference` only, so mint a narrowly scoped one for this ([scoped API keys](/docs/api-keys)). Routes under `https://dicompute.ai/openai/v1`:
 
-- `POST /webhook-endpoints` registers an endpoint: `{"url":"https://example.com/hook","event_types":["credit.added"]}`. The URL must be public HTTPS, and you can have 10 endpoints per account. Omit `event_types` to subscribe to everything.
+- `POST /webhook-endpoints` registers an endpoint: `{"url":"https://example.com/hook","event_types":["credit.added"]}`. The URL must be public HTTPS, and an account can have up to 10 endpoints by default. Omit `event_types` to subscribe to everything.
 - `POST /webhook-endpoints/{id}/test` sends a synthetic `webhook.test` event through the real signing path. It is never stored, so repeated tests cannot disable the endpoint. It is limited to 10 calls a minute.
 - `GET /webhook-endpoints/{id}/deliveries` lists past attempts, and `POST .../deliveries/{eventId}/redeliver` resends one, signed exactly like the original.
 - `POST /webhook-endpoints/{id}/rotate-secret` mints a new secret. The old one keeps signing for a fixed 24 hours, and during that window the header carries two `v1=` values. Update your stored secret at any point in the window and every delivery still verifies, as long as your code accepts either value.
@@ -132,7 +132,7 @@ Push can fail: your receiver was down, or the endpoint was auto-disabled. The sa
 
 ## Next steps
 
-- Read [Verifying webhook signatures](/docs/webhooks) for the Agent run events payloads.
+- Read [Verifying webhook signatures](/docs/webhooks) for the agent-run event payloads.
 - Keep the [webhook reference](/api-console/webhooks) open for the event catalogue.
 - Create a narrowly scoped key at [/settings/keys](/settings/keys) for managing endpoints.
 - Start with [Building on the DiCompute API](/blog/building-on-the-dicompute-api) if you are new to the API.

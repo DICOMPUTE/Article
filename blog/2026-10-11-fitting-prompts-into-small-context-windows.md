@@ -11,7 +11,7 @@ coverAlt: "Duotone editorial illustration: ruled ledger lines crossed by small t
 
 Small, cheap models with tight context windows became a popular production choice in 2026, and they turn context budgeting from an afterthought into a core skill. The model DiCompute serves directly, `qwen2.5-3b-instruct`, has a 1,024-token window according to `/openai/v1/models`. That is roughly a short page of text for the prompt, the history and the reply combined. This post shows how to stay inside it in code: read the window from the API, estimate tokens, trim history, summarize old turns and choose `max_tokens` on purpose.
 
-The window is a live value, not a constant. Other models in the catalogue list 32,768 and 131,072, though today only some are accepting requests. Write your code against the feed, and check [/models](/models) for the current state.
+The window is a live value, not a constant. Other models in the catalogue list 32,768 and 131,072, but they are served by the provider fleet, which carries traffic for one internal test account only today. Write your code against the feed, and check [/models](/models) for the current state.
 
 ## Prompt plus `max_tokens` must fit `context_length`
 

@@ -11,7 +11,7 @@ coverAlt: "Duotone editorial illustration: ruled ledger lines crossed by small t
 
 API keys leaked from public repositories and AI-assisted coding sessions at a rising rate through 2026, and a leaked key on a metered API is a spending problem as well as a security one. The defense is the same as everywhere else: give each app the least power it needs, put a ceiling on what it can spend, and be able to kill it fast.
 
-This post covers the controls DiCompute gives you on a key: scopes, spend caps with reset windows, model allowlists, rotation, revocation and an IP allowlist, plus a checklist for the day a key leaks. Everything below is about the key itself, so it matters more than any other habit.
+This post covers the controls DiCompute gives you on a key: scopes, spend caps with reset windows, model allowlists, rotation, revocation and an IP allowlist, plus a checklist for the day a key leaks.
 
 ## One key per app or environment
 
@@ -36,7 +36,7 @@ A key carries scopes, which say what it is allowed to do, separately from whethe
 | `keys:manage` | Everything `keys:read` does, plus create, patch, rotate and revoke |
 | `storage:read` / `storage:write` | Read or write stored files |
 
-A key minted with no `scopes` field gets `inference` alone. That is the right default for an app that only generates text. Give a reporting job `billing:read`, and give an uploader `storage:write` without `inference`. Keep `keys:manage` for the tool that provisions keys, because a key with that scope can mint and revoke the others. New keys can only be narrower than the key that minted them.
+A key minted with no `scopes` field gets `inference` alone. That is the right default for an app that only generates text. Give a reporting job `billing:read`, and give an uploader `storage:write` without `inference`. Keep `keys:manage` for the tool that provisions keys, because a key with that scope can mint and revoke the others. A key can never mint a key with more power than its own.
 
 To mint a key from the API, send an explicit `scopes` array. This call uses a deliberately invalid key, so it returns the standard `401` and proves only that the request shape parses:
 
@@ -94,11 +94,11 @@ You can also pin a key to source networks with `allowed_cidrs` (IPv4 CIDR only),
 3. **Hit several at once** if needed: `POST /openai/v1/keys/bulk` with `{"op":"revoke","ids":[...]}` takes up to 100 ids.
 4. **Read the usage** for the window the key was exposed, using the account usage feed in [billing](/docs/billing).
 5. **Find the leak.** Search your repository history, CI logs and chat transcripts, and remove the key from them.
-6. **If you lost every key**, the "Lost your API key" flow on the keys page replaces them after you re-verify your sign-in.
+6. **If you no longer hold any key**, the "Lost your API key" flow on the keys page revokes every key on the account and mints one replacement. It asks for an identity step-up first, and [authentication](/docs/authentication) lists which proofs it accepts.
 
 ## Keys never go in front-end code
 
-Authenticated routes send no CORS headers, on purpose, and `OPTIONS` returns `405`. A browser cannot call them from another origin, so the secret is never exposed. Keep the key on your server and proxy calls through it. Never put it in a `NEXT_PUBLIC_*` variable, a mobile app bundle or a public repository.
+Authenticated routes send no CORS headers, on purpose, and `OPTIONS` returns `405`. A browser on another origin cannot call them, so a key shipped in front-end code would fail and still be readable by anyone who opens your bundle. Keep the key on your server and proxy calls through it. Never put it in a `NEXT_PUBLIC_*` variable, a mobile app bundle or a public repository.
 
 ## Next steps
 
