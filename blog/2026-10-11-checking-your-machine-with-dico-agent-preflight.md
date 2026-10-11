@@ -64,8 +64,8 @@ nothing configured (the disk path is shortened):
 
 ```text
 [PASS] platform -- linux/x64 ships a prebuilt dico-agent binary (linux-x64)
-[INFO] hardware -- 12 CPU core(s), 54 GiB available of 63 GiB RAM, GPU: none detected. No minimum GPU, VRAM, RAM, CPU, or disk size is enforced anywhere in the codebase -- a smaller box just advertises less capacity; it is never refused for being small.
-[INFO] disk -- 446 GiB free at ~/.dico/agent (no minimum enforced -- engine + model weights vary widely in size)
+[INFO] hardware -- 8 CPU core(s), 28 GiB available of 32 GiB RAM, GPU: none detected. No minimum GPU, VRAM, RAM, CPU, or disk size is enforced anywhere in the codebase -- a smaller box just advertises less capacity; it is never refused for being small.
+[INFO] disk -- 200 GiB free at ~/.dico/agent (no minimum enforced -- engine + model weights vary widely in size)
 [PASS] coordinator -- https://dicompute.ai/health responded (HTTP 200, gateway version 2026.10.11)
 [INFO] local engine -- LOCAL_ENGINE is not set -- `dico-agent join` will auto-install one on Linux/macOS, or point LOCAL_ENGINE at your own
 
