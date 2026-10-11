@@ -43,8 +43,10 @@ procedure replaces all three with local disk.
 ## Building a bundle on a connected machine
 
 You build the bundle on a machine that does have network access, using the
-repository's `make-offline-bundle.sh` script. It needs a checkout with Bun,
-`curl` and `git`:
+repository's `make-offline-bundle.sh` script. It needs a checkout of
+DiCompute's source repository with Bun, `curl` and `git`. That repository is
+private today, so building a bundle this way needs read access to it; the same
+goes for the mirror checker further down.
 
 ```bash
 bun install
@@ -102,6 +104,11 @@ box, point the installer at it:
 ```bash
 DICO_VERSION=<exact-published-version> DICO_BUNDLE_DIR=/path/to/bundle sh scripts/install-agent.sh
 ```
+
+`scripts/install-agent.sh` is the installer as it sits in the repository. The
+published installer at `https://dicompute.ai/releases/agent/install.sh` also
+reads `DICO_BUNDLE_DIR`, so you can carry that file across with the bundle
+instead.
 
 `DICO_VERSION` must be set explicitly. Resolving "latest" would need the very
 network call this mode avoids, so the installer refuses up front. It verifies

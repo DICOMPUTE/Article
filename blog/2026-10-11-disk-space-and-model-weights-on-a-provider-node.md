@@ -98,7 +98,7 @@ Safe, per the docs:
 | Command | Reclaims | Leaves alone |
 |---|---|---|
 | `dico-agent remove-model <id>` | One model's whole weight directory | Other models; refuses if that model is currently serving |
-| `dico-agent remove-model --orphaned` | Orphaned model data | Models in use |
+| `dico-agent remove-model --orphaned` | Weight directories this install no longer references | The model or models it is configured to serve |
 | `dico-agent logs purge` | Old rotated log segments | The live log |
 | Disk-budget sweep (`MODEL_DISK_BUDGET_BYTES`) | Whole model directories, oldest-used first, when usage passes the budget | Models that are serving, loading, mid-download or resumable. Default is `0`, which disables it |
 
@@ -113,10 +113,11 @@ leftover `.dico-agent.staged.<pid>` files too, each a full copy of the binary
 (about 90 MiB, per the docs). Delete those by hand or re-run the installer,
 which sweeps them.
 
-**Never delete `identity.json`.** It holds your worker's private keys. If you
-regenerate it, the coordinator, which pinned your worker id to the key it saw
-first, will close your connection with a key-mismatch and you cannot fix that
-yourself. The `identity.json.corrupt-*` quarantine copies hold the same key
+**Never delete `identity.json`.** It holds your worker's private keys. The
+[troubleshooting docs](/docs/provider/troubleshooting) say a regenerated
+identity changes your worker id and needs a fresh login and approval. They also
+name a regenerated `identity.json` as the likely cause of a connection that
+keeps closing with key-mismatch, which you cannot fix from your side. The `identity.json.corrupt-*` quarantine copies hold the same key
 material, so treat them the same way. Also keep the credentials file in step
 with it. See the [security model](/docs/provider/security-model) before you
 touch any of it.

@@ -54,7 +54,7 @@ You can read the same posture in the
 [provider guidelines](/docs/provider/guidelines): "slashing exists as a
 mechanism though nothing has ever been slashed."
 
-## What slashing covers: availability and delivery, not correctness
+## What slashing covers: availability, not correctness
 
 The mechanism looks at one question: did your worker answer its heartbeats on
 time? That is availability. The docs are explicit that it is **never** about
@@ -102,14 +102,14 @@ Put together, this is what you can and cannot do today:
 | Does the slasher send transactions? | Not by default; dry-run unless an operator enables it |
 | Has anything been slashed? | Never |
 
-You do not need to stake to connect a worker. Joining, linking and serving
+Nothing in the join flow asks you for a stake. Joining, linking and serving
 work as described in the [provider guide](/blog/running-a-dicompute-provider-node).
 
 You can see your own record in the console at `/slashing`, which reads only
 your own workers. It shows the scope statement (availability only, correctness
-slashing out of scope), every slashable-action row for your workers with its
-window and measured uptime, any deferred incident, and your most recent
-evaluation even when it was clean. It does no chain I/O, so it works when the
+slashing out of scope) and, if any exist, the slashable-action rows for your
+workers with their window and measured uptime, any deferred incident, and your
+most recent evaluation even when it was clean. It does no chain I/O, so it works when the
 chain is down. The raw connect and disconnect history behind it is also listed
 in [what the coordinator records about your worker](/docs/provider/data-recorded),
 which gives its retention.
@@ -127,9 +127,9 @@ The path that does exist is human and off-chain: you dispute through the normal
 support channel, and an operator reconstructs the incident from the audit row
 and the gateway's own session history. If the slasher was wrong, the remedy is
 a manual make-good plus a policy fix, not an automated reversal. To prepare for
-that conversation, learn the support flow in advance; the
-[guidelines](/docs/provider/guidelines) and the logs workflow in the docs
-cover how to send a redacted log bundle.
+that conversation, learn the support flow in advance:
+[sharing logs with support](/docs/provider/sharing-logs) covers how to reach
+support and how to send a redacted log bundle.
 
 A mechanism that can take stake with no automated appeal is worth weighing
 before you ever stake. That is the point of the page.
@@ -144,8 +144,8 @@ item, and don't read "documented" as "agreed".
 
 ## Next steps
 
-- Read the [slashing docs](/docs/provider/slashing) in full before you stake
-  anything, once staking is something you can do.
+- Read the [slashing docs](/docs/provider/slashing) in full before you ever
+  stake anything.
 - Skim the [provider guidelines](/docs/provider/guidelines) for the rest of the
   ground rules.
 - Review the end-to-end provider flow in

@@ -22,8 +22,14 @@ zero requests for now ([operate page](/operate)). Nothing here is a way to
 earn anything today, and a bigger fleet does not change that. This post is about
 the mechanics of getting many machines enrolled safely.
 
-The script lives in the DiCompute repository, so you run it from a checkout of
-that repository on a machine that has SSH access to the boxes. If you have not
+The script lives in DiCompute's source repository, so you run it from a
+checkout of that repository on a machine that has SSH access to the boxes.
+That repository is private today (the
+[provider quickstart](/docs/provider/quickstart) says the same when it
+describes fetching the installer from git), so running the script as written
+needs read access to it. What the script drives is public, though: the
+per-host step below is the published installer plus an enrollment token. If you
+have not
 enrolled a single box yet, do that first with the
 [provider quickstart](/docs/provider/quickstart) and the overview in
 [Running a DiCompute provider node](/blog/running-a-dicompute-provider-node).

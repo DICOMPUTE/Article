@@ -77,8 +77,13 @@ change, so this post doesn't quote them.
 
 ## What DiCompute operators can see
 
-The [data-recorded docs](/docs/provider/data-recorded) list what the
-coordinator stores keyed to your worker:
+Start with the link that matters most. Joining links the machine to your
+DiCompute account through a device-code sign-in that you approve yourself. So
+the coordinator knows which account owns which worker, and that account is the
+one you signed in to with Google, GitHub, X or Telegram.
+
+On top of that, the [data-recorded docs](/docs/provider/data-recorded) list
+what the coordinator stores keyed to your worker:
 
 - A **fleet roster** snapshot from your last hello: hardware summary, agent
   version, trust tier, wallet address and last-seen time.
@@ -98,7 +103,10 @@ coordinator stores keyed to your worker:
 Your network address is used in memory for rate limits and for admission checks at
 the WebSocket connection, and
 the data-recorded page says it is never written to a structured log line or a
-durable store.
+durable store. That statement covers the gateway's own logs and stores. Your
+address is still seen when you connect, and each connection is tagged with a
+country at that point, which is what the country counts above are built from.
+So treat your rough location as known to DiCompute, not hidden from it.
 
 Two more facts to keep in mind. First, prompts reach your machine in plaintext:
 the docs say that anyone who operates the box can read every prompt it serves,
@@ -118,7 +126,9 @@ Most identity leaks happen at the edge of your own setup:
   output before you send anything. The
   [sharing-logs docs](/docs/provider/sharing-logs) explain what it removes.
 - **Screenshots.** A terminal showing your hostname, username or paths gives away
-  more than the pseudonym hides. Crop or redact before you post.
+  more than the pseudonym hides. So does your worker id: the explorer lists each
+  node by a shortened form of it, so a screenshot that shows the id ties you to
+  that row. Crop or redact before you post.
 - **`identity.json`.** It holds your private keys. Anyone with it can sign
   receipts as you, so guard it like any key. See the
   [security model](/docs/provider/security-model) for how it is stored and the

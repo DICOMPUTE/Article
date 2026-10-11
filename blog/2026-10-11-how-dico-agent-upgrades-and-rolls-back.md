@@ -77,11 +77,14 @@ The phase names you may see are `staged`, `prev-saved`, `committed`, `healthy`,
 
 The check step above mentions held updates. A hold stops the tick before it
 writes anything. It is the tool for "do not touch this box until I say so", for
-example a node you want frozen through a busy week. The
-[CLI reference](/docs/provider/cli-reference) lists the exact flags and exit
-codes for `update` and its subcommands, and the upgrading page deliberately does
-not repeat them. Check there for the current `--hold` syntax rather than relying
-on a copy in a blog post.
+example a node you want frozen through a busy week. Per the
+[CLI reference](/docs/provider/cli-reference), `dico-agent update --hold` takes
+an optional reason, is stored locally on the box, and is checked by every
+automatic tick and by a plain `dico-agent update` before any network call.
+`--unhold` lifts it, and `--ignore-hold` bypasses it for one manual run without
+clearing it. The CLI reference also lists the exit codes for `update` and its
+subcommands, which the upgrading page deliberately does not repeat, so check
+there rather than relying on a copy in a blog post.
 
 The automatic check is opt-in. `dico-agent update --auto on` sets the check
 interval and refuses to enable itself if the manifest URL is empty, so it
@@ -91,7 +94,9 @@ autoupdate on goes through the same stage, drain, swap and health-gate path.
 
 One more detail: running `dico-agent update` against a live agent signals it to
 run one update tick now, even when autoupdate is off, then waits for the
-outcome and exits with it. Zero means up to date or a confirmed update. Anything
+outcome and exits with it. That signal is not available on Windows, and the
+command needs the update manifest URL configured; without it, it reports that
+updates are disabled. Zero means up to date or a confirmed update. Anything
 else means held, refused, rolled back, or no answer in time.
 
 ## Quarantine: a version that failed
