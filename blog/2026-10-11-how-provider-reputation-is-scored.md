@@ -105,7 +105,7 @@ These follow from the inputs, and make no promise about traffic:
 
 - **Keep the worker connected.** Uptime is 0.3 of the score and is measured
   from real session history. Run it under the service the agent can install, so
-  a reboot does not leave a gap.
+  it comes back by itself after a reboot.
 - **Do not overcommit memory.** An out-of-memory disconnect costs 0.05 each, up
   to 0.3. Pick a model and engine settings your box can hold. `dico-agent doctor`
   has a model-memory check for this.

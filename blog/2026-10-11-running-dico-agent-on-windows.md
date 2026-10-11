@@ -86,8 +86,9 @@ run `.\dico-agent-windows-x64.exe join`.
 
 If you are not ready to commit, set `$env:DICO_SKIP_LOGIN = "1"` before the
 install. The installer then stops after placing the binary, without running
-`join`. Run `.\dico-agent.exe preflight` from the install folder, or the
-downloaded file's name followed by `preflight`. It needs no account, reports
+`join`. The installer puts the binary at
+`%LOCALAPPDATA%\dico\bin\dico-agent.exe`, so run `dico-agent.exe preflight`
+from that folder, or the downloaded file's name followed by `preflight`. It needs no account, reports
 your platform support, CPU, RAM, GPU and free disk, and ends with a verdict of
 `ready`, `workable` or `blocked`. On a fresh Windows box without an engine, the
 usual verdict is `workable`.

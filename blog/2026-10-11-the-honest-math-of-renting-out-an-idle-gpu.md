@@ -110,11 +110,11 @@ the page is candid that nothing checks your machine against it yet.
 
 ## What would change the picture
 
-Three gates, in the order the guide lists them: the deployment's operator
-enabling crediting, your worker being linked to your account, and the
-withdrawal rail being configured. Nothing here predicts when or whether that
-happens. Base rewards, a guaranteed uptime floor, are also off, and the page
-says no floor is configured.
+Three gates, in the order the [/earn](/earn) page lists them: the deployment's
+operator enabling crediting, your worker being linked to your account, and
+payout onboarding and withdrawal, which are not open. Nothing here predicts
+when or whether that happens. Base rewards are also off, and the page says no
+guaranteed monthly floor is configured.
 
 Separately, traffic has to reach your worker. Today the fleet path serves one
 internal test account, so even with every gate open, revenue needs more demand
