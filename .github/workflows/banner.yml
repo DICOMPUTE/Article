@@ -39,7 +39,7 @@ jobs:
           echo "skipped: fork pull request"
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        if: !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork)
+        if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         with:
           fetch-depth: 0
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref }}
@@ -47,16 +47,16 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
-        if: !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork)
+        if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         with:
           bun-version: "1.4.0"
 
       - name: Install the WebP encoder
-        if: !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork)
+        if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         run: sudo apt-get update && sudo apt-get install -y webp
 
       - name: Which posts need a banner
-        if: !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork)
+        if: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         id: posts
         run: |
           set -euo pipefail
@@ -81,6 +81,9 @@ jobs:
 
       - name: Commit to the pull request branch
         if: (github.event_name == 'workflow_dispatch') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == false && steps.posts.outputs.slugs != '')
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
           if [ -z "$(git status --porcelain)" ]; then
             echo "nothing to commit"
@@ -91,7 +94,7 @@ jobs:
           git add -A
           git commit -m "chore(banner): generate editorial banner(s) for post(s) without one"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            git push origin "HEAD:${{ github.ref_name }}"
+            git push origin "HEAD:$REF_NAME"
           else
-            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+            git push origin "HEAD:$HEAD_REF"
           fi
