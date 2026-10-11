@@ -116,9 +116,9 @@ curl -sS "https://dicompute.ai/openai/v1/account/usage?limit=50" \
 Each row has a `type` (`reserve`, `settle` or `refund`), a signed `delta_uusd`
 and a `reference` carrying the `requestId`. A second series, `requests`, has
 one row per HTTP request, billed or not, with `outcome`, `http_status`,
-`error_code` and `charged`. Pass `?limit=` (default 50, at most 200) and page
-back with `next_before`. Group rows by `requestId` and you can check any
-failure against the table above.
+`error_code` and `charged`. Pass `?limit=` (default 50, at most 200), and to
+page back, pass the previous page's `next_before` as `?before=`. Group rows
+by `requestId` and you can check any failure against the table above.
 
 To reconcile one request, take its `x-request-id` (every response carries
 one) and call:

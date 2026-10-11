@@ -43,10 +43,12 @@ curl -sS https://dicompute.ai/openai/v1/pricing | jq '{batch_discount_percent, m
 ```
 
 On 2026-10-11 that returned `batch_discount_percent: 50` and
-`min_charge_uusd: 100`. Lines on `/openai/v1/chat/completions` get the
-discount automatically. There is no header or field to opt in. The
-[billing docs](/docs/billing) and [/pricing](/pricing) describe the rates,
-and they can change.
+`min_charge_uusd: 100`. According to the batches entry in the
+[API reference](/api-console), lines on `/openai/v1/chat/completions` are
+billed at the discount this feed publishes, automatically. There is no
+header or field to opt in. The discount applies to the per-model rates on
+[/pricing](/pricing), which doesn't list the discount itself. The feed is
+the source, and the value can change.
 
 Two things to keep in mind when you estimate savings. The
 [estimate endpoint](/docs/billing) prices the synchronous lane only and never
@@ -59,9 +61,10 @@ workloads, not a promise for each tiny line.
 
 JSONL means one JSON object per line. Each line is one request, and each
 line's `url` field must match the batch's endpoint, which for chat is
-`/openai/v1/chat/completions`. The API reference doesn't print a sample line,
-so this follows the OpenAI batch format (`custom_id`, `method`, `url`,
-`body`), which is what that `url` rule implies:
+`/openai/v1/chat/completions`. That `url` rule is all the API reference says
+about a line. It doesn't print a sample line, so the lines below follow the
+OpenAI batch format (`custom_id`, `method`, `url`, `body`). Treat that shape
+as an assumption, and check it with a two-line file:
 
 ```json
 {"custom_id":"review-0","method":"POST","url":"/openai/v1/chat/completions","body":{"model":"qwen2.5-3b-instruct","max_tokens":16,"messages":[{"role":"user","content":"Label as positive or negative: Great product, arrived fast."}]}}
@@ -144,10 +147,11 @@ before you upload anything sensitive:
 - Files are removed automatically 30 days after upload by default, unless you
   pin them. Deleting a file moves it to a trash tier for up to 7 days, and
   `DELETE /openai/v1/files/{id}?permanent=1` removes the bytes immediately.
-- The batch processor reads your input as plaintext to run it. There is no
-  sealed variant of the upload, and the end-to-end encrypted lane is switched
-  off anyway. Don't put anything in a batch file that you aren't willing to
-  let the operator read, and no regulated data.
+- The batch processor reads your input as plaintext to run it, and there is
+  no sealed variant of the upload. The sealed lane is switched off, and even
+  when it is on it does not hide prompts from the operator. Don't put
+  anything in a batch file that you aren't willing to let the operator read,
+  and no regulated data.
 - Deleting a file never changes a batch that already used it.
 
 ## When to use the synchronous API instead
@@ -168,5 +172,6 @@ before you upload anything sensitive:
 
 - [Files](/docs/files): sizes, retention, pinning and deletion.
 - [Billing](/docs/billing): reserve, settle and the minimum charge.
-- [Pricing](/pricing): the live batch discount and per-model rates.
+- [Pricing](/pricing): the per-model rates the discount applies to.
+- [API reference](/api-console): the files and batches routes.
 - [Building on the DiCompute API](/blog/building-on-the-dicompute-api): keys, base URL and errors.

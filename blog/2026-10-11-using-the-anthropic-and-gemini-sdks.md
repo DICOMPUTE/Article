@@ -47,7 +47,7 @@ then translate it into a chat-completions request. So there is one
 reservation and one settlement per request, whichever lane you call, and the
 same catalogue, rate limits and key scopes apply to all of them.
 
-## Anthropic SDK: bare `/openai` and your key
+## Anthropic SDK: bare `/openai` and a Bearer token
 
 The Anthropic SDKs append `/v1/messages` to the base URL themselves. So the
 base URL is the bare prefix `https://dicompute.ai/openai`, not
@@ -62,7 +62,7 @@ from anthropic import Anthropic
 
 client = Anthropic(
     base_url="https://dicompute.ai/openai",
-    api_key=os.environ["DICO_KEY"],
+    auth_token=os.environ["DICO_KEY"],  # sent as Authorization: Bearer
 )
 
 msg = client.messages.create(
@@ -80,7 +80,7 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic({
   baseURL: "https://dicompute.ai/openai",
-  apiKey: process.env.DICO_KEY,
+  authToken: process.env.DICO_KEY,
 });
 
 const msg = await client.messages.create({
@@ -91,13 +91,16 @@ const msg = await client.messages.create({
 console.log(msg.content);
 ```
 
-Auth is where the docs need a careful read. The migration page says the SDK's
-default `x-api-key` header works on this route, and that
-`Authorization: Bearer` is also accepted, so one header can serve every
-protocol. The Anthropic SDK integration page tells JavaScript users to pass
-`authToken` instead of `apiKey`. The same page notes that Claude
-Code specifically sends its key as a Bearer token through
-`ANTHROPIC_AUTH_TOKEN`. If one form fails for you, try the other.
+Auth is where the docs need a careful read, because two pages disagree. The
+[migration guide](/docs/migration) says the SDK's default `x-api-key` header
+(`api_key` / `apiKey`) works on `/openai/v1/messages`. The
+[Anthropic SDK integration page](/integrations/anthropic-sdk) says DiCompute
+accepts the key only as `Authorization: Bearer`, so you should pass
+`authToken`, not `apiKey`. Both pages agree that a Bearer token is accepted,
+so the snippets above use `auth_token` / `authToken`. Claude Code is
+separate: it reads its key from `ANTHROPIC_AUTH_TOKEN`, not
+`ANTHROPIC_API_KEY`, as the [coding agents guide](/docs/coding-agents)
+explains.
 
 Anthropic requests need `max_tokens`. Keep it small on
 `qwen2.5-3b-instruct`, whose window is 1,024 tokens (see below).

@@ -136,8 +136,9 @@ used. A per-key spend cap, which you can set on a key, is the backstop. See
 
 [/connect](/connect) creates a single-use setup link for a coding client,
 aider among them. It expires in 15 minutes and contains no key. The script it
-serves reads your key from the `DICO_API_KEY` environment variable and prints
-config that names the variable. It never writes the value. The per-client steps
+serves reads your key from the `DICO_API_KEY` environment variable, or from
+standard input when that is a pipe, and prints config that names the
+variable. It never writes the value. The per-client steps
 are in [/connect.md](/connect.md). Download the script and run it. Don't pipe
 it into `sh`, because the key comes in on standard input.
 

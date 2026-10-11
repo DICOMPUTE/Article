@@ -160,7 +160,8 @@ docs label this integration "documented, not yet run".
 - You need a field the Responses table doesn't list, such as `logit_bias`, `top_k`
   or the model-gated `n` and `logprobs`. The chat route lists them. Check the
   migration matrix for what each route accepts.
-- You depend on stored responses or `previous_response_id`. Those are refused here.
+- You were moving to Responses for stored responses or `previous_response_id`.
+  Both are refused here, so you resend the conversation on either route.
 
 ## Errors
 

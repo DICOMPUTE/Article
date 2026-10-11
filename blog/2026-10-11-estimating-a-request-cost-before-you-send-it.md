@@ -94,7 +94,12 @@ Some limits to know about:
 ## The chat-completions estimate route for a full request body
 
 `POST /openai/v1/chat/completions/estimate` takes a full chat-completions body
-instead. When I called it with an invalid key it returned the standard `401`:
+instead. Unlike `/estimate`, it is not public. The API reference says it
+requires a key scoped for inference, the same scope chat completions itself
+needs. Called with no key or an invalid one, it returned the standard `401`.
+With a key, the [billing docs](/docs/billing) say it also returns a `caps`
+array that shows whether any spend cap would refuse the request. It
+reserves nothing:
 
 ```bash
 curl -sS https://dicompute.ai/openai/v1/chat/completions/estimate \
@@ -103,7 +108,7 @@ curl -sS https://dicompute.ai/openai/v1/chat/completions/estimate \
   -d '{"model":"qwen2.5-3b-instruct","messages":[{"role":"user","content":"say OK"}],"max_tokens":128}'
 ```
 
-So treat that route as keyed, even though `/estimate` isn't. A key makes the
+`/estimate` also accepts a key, optionally. A key makes the
 quote account-specific, with any per-account price overrides applied. Without
 one, `/estimate` quotes the public platform rates, exactly like the pricing
 feed. The OpenAPI spec at `/openai/v1/openapi.json` has both schemas, and
