@@ -90,9 +90,10 @@ link expires, and you can revoke it. See [sharing](/docs/sharing).
 
 ## What to keep out of a chat
 
-Your messages are protected by TLS on the way to DiCompute. But the encrypted
-lane that would also hide them from the people running the infrastructure is
-built and not yet switched on, so the operator can read prompts and replies.
+Your messages are protected by TLS on the way to DiCompute, and the operator
+can read prompts and replies. A sealed lane that would hide them from the edge
+and proxy in between is built but not yet switched on, and even then it does
+not hide them from DiCompute itself.
 Until that changes, don't paste passwords, other people's personal data, or
 anything confidential. The [trust page](/trust) and
 [privacy expectations](/docs/privacy-expectations) set out exactly what is
