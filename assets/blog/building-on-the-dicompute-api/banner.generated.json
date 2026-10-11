@@ -1,0 +1,26 @@
+{
+  "engine": "article-banner/1",
+  "generator": "scripts/banner/generate.ts",
+  "seed": 2071002425,
+  "seedSuffix": "",
+  "generatedAt": "2026-10-11T12:16:38.171Z",
+  "brief": {
+    "title": "Building on the DiCompute API",
+    "motif": "ledger-ticks",
+    "motifMatched": [
+      "billing",
+      "bill"
+    ],
+    "accentCategory": "engineering",
+    "accent": "#4de7ff",
+    "composition": "one focal motif right of centre in the upper 60%, calm lower 40%, flat duotone with uniform film grain"
+  },
+  "checks": {
+    "width": 1600,
+    "height": 900,
+    "bytes": 19000,
+    "maxBytes": 307200,
+    "lower40ContrastVsWhite": "19.62:1",
+    "ocr": "not applicable -- engine A renders no text layers"
+  }
+}
