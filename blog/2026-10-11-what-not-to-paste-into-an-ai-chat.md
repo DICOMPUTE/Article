@@ -11,7 +11,7 @@ coverAlt: "Duotone editorial illustration: a tilted orbit ring around a solid po
 
 AI data leaks, and workplace rules against pasting confidential text into chatbots, kept privacy near the top of AI worries in 2026. If you use any AI chat, DiCompute's included, it helps to have a simple checklist for what stays out of the message box.
 
-This post is blunt on purpose. On DiCompute today, the people running the service can read your prompts and the replies. The end-to-end encrypted lane that would change that is built, and switched off. So the advice below is not cautious boilerplate. It follows from how the service works right now.
+This post is blunt on purpose. On DiCompute today, the people running the service can read your prompts and the replies. An encrypted lane that narrows who can see them is built, and switched off, and as explained below, even that lane would not hide your text from the operator. So the advice below is not cautious boilerplate. It follows from how the service works right now.
 
 ## Why this matters more now
 

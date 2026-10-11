@@ -61,7 +61,7 @@ Reserve-then-settle explains one confusing sight: you may see a larger amount he
 
 Two habits lower the bill without changing what you do:
 
-- **Use a smaller model for small jobs.** Rates differ a lot from model to model. On [/pricing](/pricing), as of this post, `qwen2.5-0.5b-instruct` lists $0.01 per million input tokens, and `llama-3.3-70b-instruct` lists $0.60. Rewording a sentence doesn't need the biggest model. Check which models are accepting requests on [/models](/models).
+- **Use a smaller model for small jobs.** Rates differ a lot from model to model. On [/pricing](/pricing), as of this post, `qwen2.5-0.5b-instruct` lists $0.01 per million input tokens, and `llama-3.3-70b-instruct` lists $0.60. Rewording a sentence doesn't need the biggest model. Today only `qwen2.5-3b-instruct` is served directly; the others run on the provider network, which carries traffic for one internal test account only, so check [/models](/models) before you plan around one.
 - **Ask for shorter replies.** You pay for the words you get back, at a higher rate than the words you send. "In three bullet points" or "in two sentences" costs less than an open-ended answer.
 
 Because of the per-request minimum, very short requests all cost about the same. Cutting a tiny question down further saves nothing.

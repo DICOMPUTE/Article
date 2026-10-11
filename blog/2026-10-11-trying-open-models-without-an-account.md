@@ -55,7 +55,7 @@ Signing in turns the sample into a normal account. According to the [chat guide]
 - **Synced chats.** Your conversations are saved to your account and appear on any device you sign in on, with rename, pin, archive, search and export.
 - **Projects and a library.** Saved prompts, presets and projects sync with your account too.
 - **Sharing.** A read-only link to a snapshot of a chat, with an expiry you choose and a way to revoke it.
-- **A full catalogue.** You are no longer limited to the guest allowlist. Which models are accepting requests is still listed on [/models](/models).
+- **More models.** You are no longer limited to the guest allowlist. Not every listed model is open to you yet: the larger ones run on the provider network, which carries traffic for one internal test account only today. [/models](/models) shows what is accepting requests.
 - **Credit.** You add credit through a Stripe checkout and pay per use, so you are not limited to the guest allowance.
 
 ## Signing in with Google, GitHub, X or Telegram

@@ -25,7 +25,7 @@ On DiCompute you add credit to your account and each request draws it down. Ther
 
 AI models don't read words, they read **tokens**: pieces of text, roughly a short word or part of a longer one. Your message is counted in tokens on the way in, and the reply is counted on the way out. You pay for both, at separate rates.
 
-Prices are quoted per **million** tokens because a single token costs a tiny fraction of a cent. As of this post, the [pricing page](/pricing) lists `qwen2.5-3b-instruct` at $0.05 per million input tokens and $0.20 per million output tokens, and `ternary-bonsai-2-27b` at $0.20 and $0.60. Those figures can change, and the pricing page reads them live from the model catalogue, so check it for today's rates. The [token counter](/tools/token-counter) shows how many tokens a piece of text is, in your browser, without sending the text anywhere.
+Prices are quoted per **million** tokens because a single token costs a tiny fraction of a cent. As of this post, the [pricing page](/pricing) lists `qwen2.5-3b-instruct` at $0.05 per million input tokens and $0.20 per million output tokens. Larger models in the catalogue cost more per token. Those figures can change, and the pricing page reads them live from the model catalogue, so check it for today's rates. The [token counter](/tools/token-counter) shows how many tokens a piece of text is, in your browser, without sending the text anywhere.
 
 DiCompute tracks money in micro-dollars (µUSD). One µUSD is $0.000001. That lets a very small charge be exact, with no rounding up to a credit pack.
 
@@ -48,7 +48,7 @@ The [pricing page](/pricing) has a month estimator. Pick a model, enter how many
 Here is the arithmetic done by hand, using the listed rates above, so you can check the calculator against it. These are worked examples, not predictions of your usage:
 
 - **100 short chats a month on `qwen2.5-3b-instruct`.** Each is about 500 tokens in and 200 out. Each settles at the $0.0001 floor, so the month comes to $0.01.
-- **300 longer requests a month on `ternary-bonsai-2-27b`.** Each is about 2,000 tokens in and 500 out. Input costs 2,000 × $0.20 per million, which is $0.0004. Output costs 500 × $0.60 per million, which is $0.0003. That is $0.0007 per request, so the month comes to $0.21.
+- **300 longer replies a month on `qwen2.5-3b-instruct`.** Each is about 200 tokens in and 700 out, which still fits the model's 1,024-token context window (how much text it can hold at once). Input costs 200 × $0.05 per million, which is $0.00001. Output costs 700 × $0.20 per million, which is $0.00014. That is $0.00015 per request, above the floor, so the month comes to $0.045.
 
 To price a single request before you send it, the billing guide also describes a free estimate route for developers. If you only chat in the console, the calculator is enough.
 
@@ -69,7 +69,7 @@ It may not suit you if:
 
 - You want a bill that never varies. A flat fee is more predictable, even if you pay for unused months.
 - You want one particular closed model. DiCompute's catalogue is open models only, so check [/models](/models) first.
-- You need a model that isn't accepting requests right now. Some larger models are listed but not accepting requests today.
+- You need a larger model today. The larger models are served by the provider network, which carries traffic for one internal test account only, so check [/models](/models) before you plan around one.
 
 Either way, most models here are small open models, so judge them by the tasks you give them, and check answers that matter.
 
@@ -78,4 +78,4 @@ Either way, most models here are small open models, so judge them by the tasks y
 - See live rates and run the month estimator on [/pricing](/pricing).
 - Read the full mechanics in the [billing guide](/docs/billing).
 - Start with the basics in [Using DiCompute day to day](/blog/using-dicompute-day-to-day).
-- Look up what a request cost, and your spend history, in the [billing guide](/docs/billing).
+- Find which screen shows what a request cost in [usage and limits](/docs/usage-and-limits).

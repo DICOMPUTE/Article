@@ -65,7 +65,7 @@ Both are switched off while a reply is streaming. Wait for the reply to finish, 
 - **Both are off while a reply streams.**
 - **The branch link stays in this browser only.** The link between a branch and the chat it came from is kept in the browser where you made the branch. It isn't yet stored on your account, so it won't follow you to another device. Each chat still syncs as an ordinary chat. What doesn't sync is the record of which chat it was branched from. The [chat guide](/docs/chat) notes this.
 - **Rewind is not a long-term history.** The Undo is available for 10 seconds only.
-- **You need a saved chat.** These actions are for chats in your account. A signed-out guest chat is a different, browser-only lane, so sign in to use these actions.
+- **You need a saved chat.** The chat guide describes these actions on chats saved to your account (Rewind deletes the server copy of the later messages). A signed-out guest chat is a different, browser-only lane, so sign in before you rely on them.
 
 Your chats are listed at [/chats](/chats), where you can rename, pin, archive or delete both the original and any branches.
 

@@ -11,7 +11,7 @@ coverAlt: "Duotone editorial illustration: a tilted orbit ring around a solid po
 
 Through 2025 and 2026, "open-weight" became one of the most repeated phrases in AI news. New open releases kept arriving, and everyday users started meeting the term in app menus without anyone explaining it. This post explains it in plain language and says what it means for you when you chat on DiCompute.
 
-It is written for people who use AI, not people who build it. You don't need any maths. One honest limit up front: this post explains how open models work in general. It does not rank them against any closed model, because nothing here supports a ranking.
+It is written for people who use AI, not people who build it. You don't need any math. One honest limit up front: this post explains how open models work in general. It does not rank them against any closed model, because nothing here supports a ranking.
 
 ## What a model's weights are
 
@@ -48,7 +48,7 @@ This list changes. Models are added, and a model can be listed without accepting
 
 Open does not mean smarter, safer or more accurate. The models in the catalogue range from small to large, and the small ones in particular make mistakes: they can sound confident and be wrong, miss details in a long message, or invent a fact. This is true of every language model, open or closed.
 
-Open weights also don't make your messages private. On DiCompute today, the people running the service can read prompts and replies. The encrypted lane that would change that is built but switched off. The [trust page](/trust) has the details, and the [day-to-day guide](/blog/using-dicompute-day-to-day) lists what to keep out of a chat.
+Open weights also don't make your messages private. On DiCompute today, the people running the service can read prompts and replies. An encrypted lane that would narrow who can see them is built but switched off, and even that lane would not hide your text from the operator. The [trust page](/trust) has the details, and the [day-to-day guide](/blog/using-dicompute-day-to-day) lists what to keep out of a chat.
 
 So the habit stays the same whichever model you pick: read the answer, and check anything that matters before you rely on it.
 
@@ -58,7 +58,7 @@ Open [/models](/models). For each model you can see:
 
 - **Price.** Separate rates for what you send and for what comes back, per million tokens.
 - **Context window.** How much text the model can hold at once, counting your message and the conversation so far. Today's smallest window is 1,024 tokens, on `qwen2.5-3b-instruct`. The largest listed is 131,072.
-- **Whether it is serving.** The catalogue shows how many engines are online for each model. A model with none online may not be able to answer you yet.
+- **Whether it is serving.** The catalogue shows how many healthy providers are online for each model. A model with none online can't answer you, and, as noted above, models served by the provider network aren't open to ordinary accounts yet.
 
 The [pricing page](/pricing) shows the same rates next to a monthly cost estimator. Both pages read the live catalogue, so the figures above can change. What you see there is what the console charges.
 

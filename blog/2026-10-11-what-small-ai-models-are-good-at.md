@@ -36,7 +36,7 @@ What these jobs share is that you are the check. You read the result, and a mist
 Be careful, or pick a different tool, for:
 
 - **Long documents.** A small model may have a small context window (below), and even when the text fits, details in the middle can get lost.
-- **Multi-step reasoning.** Long chains of logic, tricky maths, or plans where each step depends on the last. A small model can slip in the middle and still sound sure of itself.
+- **Multi-step reasoning.** Long chains of logic, tricky math, or plans where each step depends on the last. A small model can slip in the middle and still sound sure of itself.
 - **Anything you can't check.** Medical, legal and money decisions, or a fact you can't verify elsewhere. If you can't tell whether the answer is right, don't rely on it.
 - **Exact quoting.** A model can invent a quotation, a name or a source. Ask it to explain, not to cite.
 
@@ -73,7 +73,7 @@ Each step is small, so the model handles it well, and each is easy for you to ch
 
 Pick a bigger model when your text is too long for a small window, or when the job needs more careful working through. In the catalogue, the larger models have much bigger windows. Two things to check first:
 
-- **Is it accepting requests right now?** A model can be listed and still not be accepting requests. Today, `llama-3.3-70b-instruct` and `llama-3.2-90b-vision-instruct` are listed but not accepting requests, so you can't use them yet. The [models page](/models) shows which models are serving, and it changes.
+- **Can you use it yet?** A model can be listed and still not be open to you. Today, every model except `qwen2.5-3b-instruct` is served by the provider network, which carries traffic for one internal test account only, so for now a bigger model is not something you can switch to. The [models page](/models) shows which models are serving, and it changes.
 - **What does it cost?** Larger models cost more per token. The [compare page](/models/compare) puts models side by side.
 
 A bigger model is not a guarantee of a right answer. It is a model with more room and, usually, fewer slips.
