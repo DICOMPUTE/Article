@@ -5,7 +5,7 @@ date: 2026-09-02
 authors: [DiCompute team]
 tags: [postgres, ledger, architecture]
 categories: [engineering]
-cover: /blog/leaving-sqlite-one-store-at-a-time/opengraph-image
+cover: /blog-assets/blog/leaving-sqlite-one-store-at-a-time/banner.webp
 ---
 
 For most of its life this system ran on `bun:sqlite`. The engineering doctrine

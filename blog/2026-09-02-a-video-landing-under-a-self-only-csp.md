@@ -5,7 +5,7 @@ date: 2026-09-02
 authors: [DiCompute team]
 tags: [landing, csp, design]
 categories: [design]
-cover: /blog/a-video-landing-under-a-self-only-csp/opengraph-image
+cover: /blog-assets/blog/a-video-landing-under-a-self-only-csp/banner.webp
 ---
 
 [Concept L](/l) is a one-screen landing page: a full-bleed looping clip, a
