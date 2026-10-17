@@ -50,7 +50,7 @@ curl -sS "https://dicompute.ai/openai/v1/account/usage/requests/$REQUEST_ID/otlp
   -H "authorization: Bearer $DICO_KEY"
 ```
 
-The response is an OTLP/HTTP JSON `ExportTraceServiceRequest`. The [billing docs](/docs/billing/reconstructing-a-request) describe it as the same reconstruction as the plain request-lookup route, reshaped: one span per dispatch attempt, with the model, final status, token counts and time to first token as span attributes. They are the same numbers the plain route returns, not a second derived copy. The [usage and limits page](/docs/usage-and-limits) lists the neighbouring introspection routes.
+The response is an OTLP/HTTP JSON `ExportTraceServiceRequest`. The [billing docs](/docs/billing/estimated-usage-when-it-happens-and-why-its-disclosed#reconstructing-a-request) describe it as the same reconstruction as the plain request-lookup route, reshaped: one span per dispatch attempt, with the model, final status, token counts and time to first token as span attributes. They are the same numbers the plain route returns, not a second derived copy. The [usage and limits page](/docs/usage-and-limits) lists the neighbouring introspection routes.
 
 Some rules to know:
 
